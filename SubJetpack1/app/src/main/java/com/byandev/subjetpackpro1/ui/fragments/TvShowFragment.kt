@@ -29,7 +29,11 @@ class TvShowFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        progress_bar.visibility = View.VISIBLE
+        progress_bar.isShown
         if (activity != null) {
+
+            progress_bar.visibility = View.GONE
 
             val viewModel = ViewModelProvider(
                 this,

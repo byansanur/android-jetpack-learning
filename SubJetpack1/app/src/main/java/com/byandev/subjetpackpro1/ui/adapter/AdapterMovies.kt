@@ -1,5 +1,6 @@
 package com.byandev.subjetpackpro1.ui.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.byandev.subjetpackpro1.R
 import com.byandev.subjetpackpro1.data.MovieEntity
+import com.byandev.subjetpackpro1.ui.activity.DetailActivity
 import kotlinx.android.synthetic.main.item_movie.view.*
 
 class AdapterMovies : RecyclerView.Adapter<AdapterMovies.Holder>() {
@@ -34,6 +36,12 @@ class AdapterMovies : RecyclerView.Adapter<AdapterMovies.Holder>() {
                             .error(R.drawable.ic_baseline_signal_cellular_connected_no_internet_4_bar_24)
                     )
                     .into(imgPath)
+                setOnClickListener {
+                    val intent = Intent(context, DetailActivity::class.java).apply {
+                        putExtra(DetailActivity.EXTRA_MOVIE, movieEntity.movieId)
+                    }
+                    context.startActivity(intent)
+                }
             }
         }
     }
