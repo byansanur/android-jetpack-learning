@@ -7,6 +7,21 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/extended_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_gravity="bottom|right"
+        android:contentDescription="@string/todo"
+        android:text="@string/share"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary"
+        app:icon="@drawable/ic_baseline_share_24"
+        app:iconTint="@color/colorPrimary"
+        app:backgroundTint="@color/colorAccent"
+        tools:ignore="RtlHardcoded" />
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_height="400dp"
@@ -131,14 +146,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="32dp"
+                android:background="?attr/selectableItemBackground"
                 android:ellipsize="end"
                 android:maxLines="3"
-                android:background="?attr/selectableItemBackground"
                 android:textColor="@android:color/black"
                 android:textSize="17sp"
                 android:textStyle="normal|italic"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/tvOverview"
                 app:layout_constraintStart_toStartOf="@+id/tvOverview"
                 app:layout_constraintTop_toBottomOf="@id/tvOverview"

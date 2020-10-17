@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ShareCompat
 import androidx.core.view.ViewCompat
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -131,6 +132,13 @@ class DetailActivity : AppCompatActivity() {
         tvRelease.text = movies.releaseDate
         tvGenre.text = movies.genre
         tvDesc.text = movies.description
+        extended_fab.setOnClickListener {
+            ShareCompat.IntentBuilder.from(this)
+                .setType("text/plain")
+                .setChooserTitle("Bagikan film ini kesiapapun")
+                .setText("Hei ini ada film bagus ${movies.title}")
+                .startChooser()
+        }
     }
 
     private fun prepareDataTvShow(tvId: String?) {
@@ -155,5 +163,12 @@ class DetailActivity : AppCompatActivity() {
         tvRelease.text = tv.releaseDate
         tvGenre.text = tv.genre
         tvDesc.text = tv.description
+        extended_fab.setOnClickListener {
+            ShareCompat.IntentBuilder.from(this)
+                .setType("text/plain")
+                .setChooserTitle("Bagikan film ini kesiapapun")
+                .setText("Hei ini ada film bagus ${tv.title}")
+                .startChooser()
+        }
     }
 }
