@@ -136,7 +136,7 @@ class DetailActivity : AppCompatActivity() {
             ShareCompat.IntentBuilder.from(this)
                 .setType("text/plain")
                 .setChooserTitle("Bagikan film ini kesiapapun")
-                .setText("Hei ini ada film bagus ${movies.title}")
+                .setText("Hei ini ada film bagus ${movies.title}, lihat disini ${movies.url}")
                 .startChooser()
         }
     }
@@ -167,7 +167,7 @@ class DetailActivity : AppCompatActivity() {
             ShareCompat.IntentBuilder.from(this)
                 .setType("text/plain")
                 .setChooserTitle("Bagikan film ini kesiapapun")
-                .setText("Hei ini ada film bagus ${tv.title}")
+                .setText("Hei ini ada serial tv bagus ${tv.title}, lihat disini ${tv.url}")
                 .startChooser()
         }
     }

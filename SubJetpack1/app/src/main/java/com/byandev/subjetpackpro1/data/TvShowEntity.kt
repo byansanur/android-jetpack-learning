@@ -6,5 +6,6 @@ data class TvShowEntity (
     var description: String,
     var genre: String,
     var releaseDate: String,
-    var imgPath: String
+    var imgPath: String,
+    var url: String
 )

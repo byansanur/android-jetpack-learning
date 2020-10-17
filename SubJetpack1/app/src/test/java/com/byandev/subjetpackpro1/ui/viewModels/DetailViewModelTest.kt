@@ -32,6 +32,7 @@ class DetailViewModelTest {
         assertEquals(dummyMovie[0].releaseDate, movieEntity.releaseDate)
         assertEquals(dummyMovie[0].genre, movieEntity.genre)
         assertEquals(dummyMovie[0].imgPath, movieEntity.imgPath)
+        assertEquals(dummyMovie[0].url, movieEntity.url)
     }
 
     @Test
@@ -45,5 +46,6 @@ class DetailViewModelTest {
         assertEquals(dummyTvShow[0].releaseDate, tvEntity.releaseDate)
         assertEquals(dummyTvShow[0].genre, tvEntity.genre)
         assertEquals(dummyTvShow[0].imgPath, tvEntity.imgPath)
+        assertEquals(dummyTvShow[0].url, tvEntity.url)
     }
 }
