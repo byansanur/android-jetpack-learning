@@ -7,7 +7,7 @@
     tools:context=".ui.fragments.TvShowFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvMovie"
+        android:id="@+id/rvTvShow"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"

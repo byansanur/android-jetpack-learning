@@ -17,6 +17,7 @@ import com.byandev.subjetpackpro1.ui.viewModels.DetailViewModel
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.AppBarLayout.BaseOnOffsetChangedListener
 import kotlinx.android.synthetic.main.activity_detail.*
+import kotlinx.android.synthetic.main.item_poster.*
 
 class DetailActivity : AppCompatActivity() {
 
@@ -139,6 +140,33 @@ class DetailActivity : AppCompatActivity() {
                 .setText("Hei ini ada film bagus ${movies.title}, lihat disini ${movies.url}")
                 .startChooser()
         }
+        Glide.with(this)
+            .load(movies.poster1)
+            .apply(
+                RequestOptions.placeholderOf(R.drawable.ic_baseline_broken_image_24)
+                    .error(R.drawable.ic_baseline_signal_cellular_connected_no_internet_4_bar_24)
+            )
+            .fitCenter()
+            .centerCrop()
+            .into(imgPoster)
+        Glide.with(this)
+            .load(movies.poster2)
+            .apply(
+                RequestOptions.placeholderOf(R.drawable.ic_baseline_broken_image_24)
+                    .error(R.drawable.ic_baseline_signal_cellular_connected_no_internet_4_bar_24)
+            )
+            .fitCenter()
+            .centerCrop()
+            .into(imgPoster2)
+        Glide.with(this)
+            .load(movies.poster3)
+            .apply(
+                RequestOptions.placeholderOf(R.drawable.ic_baseline_broken_image_24)
+                    .error(R.drawable.ic_baseline_signal_cellular_connected_no_internet_4_bar_24)
+            )
+            .fitCenter()
+            .centerCrop()
+            .into(imgPoster3)
     }
 
     private fun prepareDataTvShow(tvId: String?) {
@@ -170,5 +198,6 @@ class DetailActivity : AppCompatActivity() {
                 .setText("Hei ini ada serial tv bagus ${tv.title}, lihat disini ${tv.url}")
                 .startChooser()
         }
+        include_layout.visibility = View.GONE
     }
 }

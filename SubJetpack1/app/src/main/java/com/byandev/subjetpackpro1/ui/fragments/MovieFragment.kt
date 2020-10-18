@@ -29,11 +29,8 @@ class MovieFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        progress_bar.visibility = View.VISIBLE
-        progress_bar.isShown
         if (activity != null) {
 
-            progress_bar.visibility = View.GONE
 
             val viewModel = ViewModelProvider(
                 this,
@@ -42,11 +39,17 @@ class MovieFragment : Fragment() {
 
             val movie = viewModel.getMovie()
             val adapterMovies = AdapterMovies()
-            adapterMovies.setMovieEntity(movie)
-            rv_academy.apply {
-                layoutManager = LinearLayoutManager(context)
-                setHasFixedSize(true)
-                adapter = adapterMovies
+            if (movie.isNullOrEmpty()) {
+                rvMovie.visibility = View.GONE
+                progress_bar.visibility = View.VISIBLE
+            } else {
+                adapterMovies.setMovieEntity(movie)
+                rvMovie.apply {
+                    layoutManager = LinearLayoutManager(context)
+                    setHasFixedSize(true)
+                    adapter = adapterMovies
+                }
+                progress_bar.visibility = View.GONE
             }
         }
     }

@@ -7,5 +7,8 @@ data class MovieEntity (
     var genre: String,
     var releaseDate: String,
     var imgPath: String,
-    var url: String
+    var url: String,
+    var poster1: String?,
+    var poster2: String?,
+    var poster3: String?
 )

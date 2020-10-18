@@ -15,7 +15,10 @@ object DataDummy {
             "Action, Adventure, Fantasy",
             "12/21/2018",
             "https://image.tmdb.org/t/p/w1280/5Kg76ldv7VxeX9YlcQXiowHgdX6.jpg",
-            "https://www.themoviedb.org/movie/297802-aquaman"
+            "https://www.themoviedb.org/movie/297802-aquaman",
+            "https://image.tmdb.org/t/p/w1280/ydUpl3QkVUCHCq1VWvo2rW4Sf7y.jpg",
+            "https://image.tmdb.org/t/p/w1280/xLPffWMhMj1l50ND3KchMjYoKmE.jpg",
+            "https://image.tmdb.org/t/p/w1280/zdw7Wf97vsQ0YnGomxDqfcEdUjX.jpg"
         ))
         movieEntity.add(MovieEntity(
             "m2",
@@ -24,7 +27,10 @@ object DataDummy {
             "Drama, Music",
             "11/02/2018",
             "https://image.tmdb.org/t/p/w1280/lHu1wtNaczFPGFDTrjCSzeLPTKN.jpg",
-            "https://www.themoviedb.org/movie/424694-bohemian-rhapsody"
+            "https://www.themoviedb.org/movie/424694-bohemian-rhapsody",
+            "https://image.tmdb.org/t/p/w1280/bmUuhUADvSxzagvm7jewCHjrY6m.jpg",
+            "https://image.tmdb.org/t/p/w1280/qJRVJc2kUdoNQPRC3lNtLTn0ZW5.jpg",
+            "https://image.tmdb.org/t/p/w1280/yjX2V0jo8HOMVO71724yzyR3CtV.jpg"
         ))
         movieEntity.add(MovieEntity(
             "m3",
@@ -33,7 +39,10 @@ object DataDummy {
             "Action, Science Fiction, Adventure",
             "02/14/2019",
             "https://image.tmdb.org/t/p/w1280/xRWht48C2V8XNfzvPehyClOvDni.jpg",
-            "https://www.themoviedb.org/movie/399579-alita-battle-angel"
+            "https://www.themoviedb.org/movie/399579-alita-battle-angel",
+            "https://image.tmdb.org/t/p/w1280/8LyWVwDbU4vsOwns8RxOB9aX73l.jpg",
+            "https://image.tmdb.org/t/p/w1280/i8OTdXMAnIZgjUDyzmeyVeRhfyo.jpg",
+            "https://image.tmdb.org/t/p/w1280/5OD9W0twXHGx9O9BYgJti3ItRBF.jpg"
         ))
         movieEntity.add(MovieEntity(
             "m4",
@@ -42,7 +51,10 @@ object DataDummy {
             "Drama",
             "11/21/2018",
             "https://image.tmdb.org/t/p/w1280/v3QyboWRoA4O9RbcsqH8tJMe8EB.jpg",
-            "https://www.themoviedb.org/movie/480530-creed-ii"
+            "https://www.themoviedb.org/movie/480530-creed-ii",
+            "https://image.tmdb.org/t/p/w1280/qPQFWrLoQYyGxmeBgmpX901Q0mF.jpg",
+            "https://image.tmdb.org/t/p/w1280/zAu6ajsuyL9dwMhOFerfwqtjsX4.jpg",
+            "https://image.tmdb.org/t/p/w1280/quYXtLo1SVxYHr4LgxMMw569nHQ.jpg"
         ))
         movieEntity.add(MovieEntity(
             "m5",
@@ -51,7 +63,10 @@ object DataDummy {
             "Action, Adventure, Drama, Fantasy",
             "09/04/2020 ",
             "https://image.tmdb.org/t/p/w1280/ffVoswXHDZvyi53yJ1Q4rb9I60q.jpg",
-            "https://www.themoviedb.org/movie/337401-mulan"
+            "https://www.themoviedb.org/movie/337401-mulan",
+            "https://image.tmdb.org/t/p/w1280/aKx1ARwG55zZ0GpRvU2WrGrCG9o.jpg",
+            "https://image.tmdb.org/t/p/w1280/7Su8HBF7HgJdjIh7ZTgRRsWpHj4.jpg",
+            "https://image.tmdb.org/t/p/w1280/aKx1ARwG55zZ0GpRvU2WrGrCG9o.jpg"
         ))
         movieEntity.add(MovieEntity(
             "m6",
@@ -60,7 +75,10 @@ object DataDummy {
             "Action, Horror, Thriller",
             "07/15/2020",
             "https://image.tmdb.org/t/p/w1280/sy6DvAu72kjoseZEjocnm2ZZ09i.jpg",
-            "https://www.themoviedb.org/movie/581392"
+            "https://www.themoviedb.org/movie/581392",
+            "https://image.tmdb.org/t/p/w1280/qywXjaaykOlQbaQW64pVOPuzxeM.jpg",
+            "https://image.tmdb.org/t/p/w1280/rdPagO48A6cii819tofBYf2zkRe.jpg",
+            "https://image.tmdb.org/t/p/w1280/xsABXSjwuJst4HHfvpkAtK4cFVa.jpg"
         ))
         movieEntity.add(MovieEntity(
             "m7",
@@ -69,7 +87,10 @@ object DataDummy {
             "Action, Thriller",
             "08/25/2020",
             "https://image.tmdb.org/t/p/w1280/i4kPwXPlM1iy8Jf3S1uuLuwqQAV.jpg",
-            "https://www.themoviedb.org/movie/721452-one-night-in-bangkok"
+            "https://www.themoviedb.org/movie/721452-one-night-in-bangkok",
+            "https://image.tmdb.org/t/p/w1280/gHsi5EVaeu30vR1e0Ws17Q0BJCe.jpg",
+            "https://image.tmdb.org/t/p/w1280/71NYnm9pvUuh92uQj8gzAGTNXbu.jpg",
+            "https://image.tmdb.org/t/p/w1280/ggQEfZfMGxfBah3HOjjnzbf87tD.jpg"
         ))
         movieEntity.add(MovieEntity(
             "m8",
@@ -78,7 +99,10 @@ object DataDummy {
             "Family, Animation, Adventure, Comedy, Mystery",
             "06/30/2020",
             "https://image.tmdb.org/t/p/w1280/kPzcvxBwt7kEISB9O4jJEuBn72t.jpg",
-            "https://www.themoviedb.org/movie/677638-we-bare-bears-the-movie"
+            "https://www.themoviedb.org/movie/677638-we-bare-bears-the-movie",
+            null,
+            null,
+            null
         ))
         movieEntity.add(MovieEntity(
             "m9",
@@ -87,7 +111,10 @@ object DataDummy {
             "Crime, Thriller, Drama",
             "10/02/2019",
             "https://image.tmdb.org/t/p/w1280/bfHlGMDq2RqRT1xmjq9NJSzfhCv.jpg",
-            "https://www.themoviedb.org/movie/475557-joker"
+            "https://www.themoviedb.org/movie/475557-joker",
+            "https://image.tmdb.org/t/p/w1280/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg",
+            "https://image.tmdb.org/t/p/w1280/tfzagTRS9eLEwC3UMmYqiA48D8k.jpg",
+            "https://image.tmdb.org/t/p/w1280/2H6O9wJohvBlrelCOer4RKPW72L.jpg"
         ))
         movieEntity.add(MovieEntity(
             "m10",
@@ -96,7 +123,10 @@ object DataDummy {
             "Family, Animation, Comedy, Adventure",
             "07/08/2020",
             "https://image.tmdb.org/t/p/w1280/jHo2M1OiH9Re33jYtUQdfzPeUkx.jpg",
-            "https://www.themoviedb.org/movie/385103-scooby-doo"
+            "https://www.themoviedb.org/movie/385103-scooby-doo",
+            "https://image.tmdb.org/t/p/w1280/6fbPhzE3trQaQNMfvCYjJEvBSo7.jpg",
+            "https://image.tmdb.org/t/p/w1280/btuLCNCJSYKbiPmIyu7Aip2Mggg.jpg",
+            "https://image.tmdb.org/t/p/w1280/mWUR4pAMHlPncXzaYpdXGXtv4yE.jpg"
         ))
 
         return movieEntity
