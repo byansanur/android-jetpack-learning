@@ -140,33 +140,39 @@ class DetailActivity : AppCompatActivity() {
                 .setText("Hei ini ada film bagus ${movies.title}, lihat disini ${movies.url}")
                 .startChooser()
         }
-        Glide.with(this)
-            .load(movies.poster1)
-            .apply(
-                RequestOptions.placeholderOf(R.drawable.ic_baseline_broken_image_24)
-                    .error(R.drawable.ic_baseline_signal_cellular_connected_no_internet_4_bar_24)
-            )
-            .fitCenter()
-            .centerCrop()
-            .into(imgPoster)
-        Glide.with(this)
-            .load(movies.poster2)
-            .apply(
-                RequestOptions.placeholderOf(R.drawable.ic_baseline_broken_image_24)
-                    .error(R.drawable.ic_baseline_signal_cellular_connected_no_internet_4_bar_24)
-            )
-            .fitCenter()
-            .centerCrop()
-            .into(imgPoster2)
-        Glide.with(this)
-            .load(movies.poster3)
-            .apply(
-                RequestOptions.placeholderOf(R.drawable.ic_baseline_broken_image_24)
-                    .error(R.drawable.ic_baseline_signal_cellular_connected_no_internet_4_bar_24)
-            )
-            .fitCenter()
-            .centerCrop()
-            .into(imgPoster3)
+        if (movies.poster1 != null) {
+            Glide.with(this)
+                .load(movies.poster1)
+                .apply(
+                    RequestOptions.placeholderOf(R.drawable.ic_baseline_broken_image_24)
+                        .error(R.drawable.ic_baseline_signal_cellular_connected_no_internet_4_bar_24)
+                )
+                .fitCenter()
+                .centerCrop()
+                .into(imgPoster)
+        } else include_layout.visibility = View.GONE
+        if (movies.poster2 != null) {
+            Glide.with(this)
+                .load(movies.poster2)
+                .apply(
+                    RequestOptions.placeholderOf(R.drawable.ic_baseline_broken_image_24)
+                        .error(R.drawable.ic_baseline_signal_cellular_connected_no_internet_4_bar_24)
+                )
+                .fitCenter()
+                .centerCrop()
+                .into(imgPoster2)
+        } else include_layout.visibility = View.GONE
+        if (movies.poster3 != null) {
+            Glide.with(this)
+                .load(movies.poster3)
+                .apply(
+                    RequestOptions.placeholderOf(R.drawable.ic_baseline_broken_image_24)
+                        .error(R.drawable.ic_baseline_signal_cellular_connected_no_internet_4_bar_24)
+                )
+                .fitCenter()
+                .centerCrop()
+                .into(imgPoster3)
+        } else include_layout.visibility = View.GONE
     }
 
     private fun prepareDataTvShow(tvId: String?) {
