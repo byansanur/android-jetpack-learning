@@ -104,7 +104,7 @@ class HomeActivityTest {
 
         onView(ViewMatchers.withId(R.id.tvDesc)).perform(click())
         onView(ViewMatchers.withId(R.id.extended_fab)).perform(click())
-        onView(ViewMatchers.withId(R.id.toolbar)).perform(pressBack())
+        pressBack()
 
     }
 
@@ -160,7 +160,7 @@ class HomeActivityTest {
 
         onView(ViewMatchers.withId(R.id.tvDesc)).perform(click())
         onView(ViewMatchers.withId(R.id.extended_fab)).perform(click())
-        onView(ViewMatchers.withId(R.id.toolbar)).perform(pressBack())
+        pressBack()
 
     }
 
