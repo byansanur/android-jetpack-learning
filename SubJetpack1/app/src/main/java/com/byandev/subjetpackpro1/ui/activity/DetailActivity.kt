@@ -55,10 +55,8 @@ class DetailActivity : AppCompatActivity() {
         setAppBar()
 
         tvDesc.viewTreeObserver.addOnGlobalLayoutListener {
-            if (!expandable) {
-                if (tvDesc.lineCount > 3) {
-                    tvDesc.visibility = View.VISIBLE
-                }
+            if (!expandable && tvDesc.lineCount > 3) {
+                tvDesc.visibility = View.VISIBLE
             }
         }
 
