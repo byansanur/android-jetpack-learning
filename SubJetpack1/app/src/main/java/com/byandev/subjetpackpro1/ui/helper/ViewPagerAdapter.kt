@@ -28,7 +28,7 @@ class ViewPagerAdapter(
             else -> Fragment()
         }
 
-    override fun getCount(): Int = 2
+    override fun getCount(): Int = TITLE.size
 
     override fun getPageTitle(position: Int): CharSequence? =
         context.getString(TITLE[position])

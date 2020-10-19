@@ -1,11 +1,13 @@
 package com.byandev.subjetpackpro1.ui.activity
 
-import android.graphics.PorterDuff
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
+import androidx.core.graphics.BlendModeColorFilterCompat
+import androidx.core.graphics.BlendModeCompat
 import androidx.core.view.ViewCompat
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -73,7 +75,6 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    @Suppress("DEPRECATION")
     private fun setAppBar() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             appbar.outlineProvider = null
@@ -82,18 +83,20 @@ class DetailActivity : AppCompatActivity() {
         toolbar.setNavigationOnClickListener { onBackPressed() }
         appbar.addOnOffsetChangedListener(BaseOnOffsetChangedListener { _: AppBarLayout?, verticalOffset: Int ->
             if (collapsing.height + verticalOffset < 2 * ViewCompat.getMinimumHeight(collapsing)) {
-                toolbar.navigationIcon?.setColorFilter(
-                    resources.getColor(R.color.colorAccent),
-                    PorterDuff.Mode.SRC_ATOP
-                )
+                toolbar.navigationIcon?.colorFilter =
+                    BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
+                        Color.argb(100,0,153,204), // color blue accent
+                        BlendModeCompat.SRC_ATOP
+                    )
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
                 }
             } else {
-                toolbar.navigationIcon?.setColorFilter(
-                    resources.getColor(R.color.colorPrimary),
-                    PorterDuff.Mode.SRC_ATOP
-                )
+                toolbar.navigationIcon?.colorFilter =
+                    BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
+                        Color.argb(100,255,255,255), // color white primary
+                        BlendModeCompat.SRC_ATOP
+                    )
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 }

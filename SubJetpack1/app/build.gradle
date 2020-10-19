@@ -51,5 +51,6 @@ dependencies {
     androidTestImplementation "androidx.test:rules:$androidXTestVersion"
 
     implementation "androidx.lifecycle:lifecycle-viewmodel:$archLifecycleVersion"
+    implementation 'androidx.core:core-ktx:1.3.2'
 
 }
