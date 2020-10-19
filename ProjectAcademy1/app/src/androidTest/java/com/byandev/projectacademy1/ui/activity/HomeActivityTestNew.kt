@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.byandev.projectacademy1.ui.activity
 
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +11,6 @@ import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.rule.ActivityTestRule
 import com.byandev.projectacademy1.R
 import com.byandev.projectacademy1.utils.DataDummy
-import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
 
