@@ -1,13 +1,14 @@
 package com.byandev.projectacademy1.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.byandev.projectacademy1.R
 import com.byandev.projectacademy1.ui.fragments.ModuleContentFragment
 import com.byandev.projectacademy1.ui.fragments.ModuleListFragment
 import com.byandev.projectacademy1.ui.helper.CourseReaderCallback
 import com.byandev.projectacademy1.ui.viewModels.CourseReaderViewModel
+import com.byandev.projectacademy1.ui.viewModels.ViewModelFactory
 
 class CourseReaderActivity : AppCompatActivity(), CourseReaderCallback {
 
@@ -17,9 +18,11 @@ class CourseReaderActivity : AppCompatActivity(), CourseReaderCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_reader)
+
+        val factory = ViewModelFactory.getInstance(this)
         val viewModel = ViewModelProvider(
             this,
-            ViewModelProvider.NewInstanceFactory()
+            factory
         )[CourseReaderViewModel::class.java]
 
         val bundle = intent.extras
