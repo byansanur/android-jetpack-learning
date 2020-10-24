@@ -1,4 +1,4 @@
-package com.byandev.projectacademy1.ui.fragments
+package com.byandev.projectacademy1.ui.reader.content
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.byandev.projectacademy1.R
 import com.byandev.projectacademy1.data.source.local.entity.ModuleEntity
-import com.byandev.projectacademy1.ui.viewModels.CourseReaderViewModel
+import com.byandev.projectacademy1.ui.reader.CourseReaderViewModel
 import com.byandev.projectacademy1.ui.viewModels.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_module_content.*
 

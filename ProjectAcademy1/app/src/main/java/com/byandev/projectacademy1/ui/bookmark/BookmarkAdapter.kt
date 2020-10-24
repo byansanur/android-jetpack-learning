@@ -1,4 +1,4 @@
-package com.byandev.projectacademy1.ui.adapter
+package com.byandev.projectacademy1.ui.bookmark
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -9,8 +9,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.byandev.projectacademy1.R
 import com.byandev.projectacademy1.data.source.local.entity.CourseEntity
-import com.byandev.projectacademy1.ui.activity.DetailCourseActivity
-import com.byandev.projectacademy1.ui.helper.BookmarkFragmentCallback
+import com.byandev.projectacademy1.ui.detail.DetailCourseActivity
 import kotlinx.android.synthetic.main.items_academy.view.img_poster
 import kotlinx.android.synthetic.main.items_academy.view.tv_item_date
 import kotlinx.android.synthetic.main.items_academy.view.tv_item_description

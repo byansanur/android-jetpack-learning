@@ -1,4 +1,4 @@
-package com.byandev.projectacademy1.ui.viewModels
+package com.byandev.projectacademy1.ui.detail
 
 import androidx.lifecycle.ViewModel
 import com.byandev.projectacademy1.data.source.AcademyRepository

@@ -5,6 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.byandev.projectacademy1.data.source.AcademyRepository
 import com.byandev.projectacademy1.injection.Injection
+import com.byandev.projectacademy1.ui.academy.AcademyViewModel
+import com.byandev.projectacademy1.ui.bookmark.BookmarkViewModel
+import com.byandev.projectacademy1.ui.detail.DetailCourseViewModel
+import com.byandev.projectacademy1.ui.reader.CourseReaderViewModel
 
 class ViewModelFactory private constructor(
     private val mAcademyRepository: AcademyRepository

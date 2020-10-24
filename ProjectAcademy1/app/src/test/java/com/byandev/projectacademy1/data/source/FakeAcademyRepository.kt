@@ -5,19 +5,11 @@ import com.byandev.projectacademy1.data.source.local.entity.CourseEntity
 import com.byandev.projectacademy1.data.source.local.entity.ModuleEntity
 import com.byandev.projectacademy1.data.source.remote.RemoteDataSource
 
-class AcademyRepository private constructor(
+// for fake test private constructor and getInstance remove because for easy to test this repository
+class FakeAcademyRepository (
     private val remoteDataSource: RemoteDataSource
 ) : AcademyDataSource {
 
-    companion object {
-        @Volatile
-        private var instance: AcademyRepository? = null
-
-        fun getInstance(remoteDataSource: RemoteDataSource) : AcademyRepository =
-            instance ?: synchronized(this) {
-                instance ?: AcademyRepository(remoteDataSource)
-            }
-    }
 
     override fun getAllCourse(): ArrayList<CourseEntity> {
         val courseResponse = remoteDataSource.getAllCourses()

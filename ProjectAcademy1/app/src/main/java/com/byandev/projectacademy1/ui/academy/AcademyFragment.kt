@@ -1,4 +1,4 @@
-package com.byandev.projectacademy1.ui.fragments
+package com.byandev.projectacademy1.ui.academy
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.byandev.projectacademy1.R
-import com.byandev.projectacademy1.ui.adapter.AcademyAdapter
-import com.byandev.projectacademy1.ui.viewModels.AcademyViewModel
 import com.byandev.projectacademy1.ui.viewModels.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_academy.*
 

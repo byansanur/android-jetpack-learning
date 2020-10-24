@@ -1,4 +1,4 @@
-package com.byandev.projectacademy1.ui.activity
+package com.byandev.projectacademy1.ui.detail
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,9 +10,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.byandev.projectacademy1.R
 import com.byandev.projectacademy1.data.source.local.entity.CourseEntity
-import com.byandev.projectacademy1.ui.viewModels.DetailCourseViewModel
+import com.byandev.projectacademy1.ui.reader.CourseReaderActivity
 import com.byandev.projectacademy1.ui.viewModels.ViewModelFactory
-import com.dicoding.academies.ui.detail.DetailCourseAdapter
 import kotlinx.android.synthetic.main.activity_detail_course.*
 import kotlinx.android.synthetic.main.content_detail_course.*
 
