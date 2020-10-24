@@ -14,17 +14,17 @@
         android:allowBackup="false"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".ui.activity.DetailCourseActivity"
+            android:name=".ui.detail.DetailCourseActivity"
             android:label="@string/title_activity_detail_course"
-            android:parentActivityName=".ui.activity.HomeActivity"
+            android:parentActivityName=".ui.home.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activity.HomeActivity"/>
+                android:value=".ui.home.HomeActivity"/>
         </activity>
-        <activity android:name=".ui.activity.CourseReaderActivity" />
-        <activity android:name=".ui.activity.HomeActivity">
+        <activity android:name=".ui.reader.CourseReaderActivity" />
+        <activity android:name=".ui.home.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

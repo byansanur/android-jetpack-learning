@@ -10,6 +10,7 @@ import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.rule.ActivityTestRule
 import com.byandev.projectacademy1.R
+import com.byandev.projectacademy1.ui.home.HomeActivity
 import com.byandev.projectacademy1.utils.DataDummy
 import org.junit.Rule
 import org.junit.Test

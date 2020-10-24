@@ -1,7 +1,7 @@
-package com.byandev.projectacademy1.ui.activity
+package com.byandev.projectacademy1.ui.home
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.byandev.projectacademy1.R
 import com.byandev.projectacademy1.ui.helper.SectionPagerAdapter
 import kotlinx.android.synthetic.main.activity_home.*

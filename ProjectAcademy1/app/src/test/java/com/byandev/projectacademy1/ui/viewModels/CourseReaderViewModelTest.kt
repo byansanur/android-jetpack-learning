@@ -1,12 +1,21 @@
 package com.byandev.projectacademy1.ui.viewModels
 
+import com.byandev.projectacademy1.data.source.AcademyRepository
 import com.byandev.projectacademy1.data.source.local.entity.ContentEntity
+import com.byandev.projectacademy1.data.source.local.entity.ModuleEntity
+import com.byandev.projectacademy1.ui.reader.CourseReaderViewModel
 import com.byandev.projectacademy1.utils.DataDummy
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.Mock
+import org.mockito.Mockito.`when`
+import org.mockito.Mockito.verify
+import org.mockito.junit.MockitoJUnitRunner
 
+@RunWith(MockitoJUnitRunner::class)
 class CourseReaderViewModelTest {
 
     /*
@@ -20,6 +29,21 @@ class CourseReaderViewModelTest {
             - Memastikan data content tidak null.
             - Memastikan value dari content tidak null.
             - Memastikan data content sesuai dengan yang diharapkan.
+
+    update :
+    CourseReaderViewModelTest:
+
+    Memuat Modules:
+        - Memanipulasi data ketika pemanggilan data module di kelas repository.
+        - Memastikan metode di kelas repository terpanggil.
+        - Melakukan pengecekan data module apakah null atau tidak.
+        - Melakukan pengecekan jumlah data module apakah sudah sesuai atau belum.
+
+    Memuat Module yang dipilih:
+        - Memanipulasi data ketika pemanggilan data content di kelas repository.
+        - Memastikan metode di kelas repository terpanggil.
+        - Melakukan pengecekan data content apakah null atau tidak.
+        - Membandingkan data content sudah sesuai dengan yang diharapkan atau tidak.
      */
 
     private lateinit var viewModel: CourseReaderViewModel
@@ -29,10 +53,13 @@ class CourseReaderViewModelTest {
     private val dummyModules = DataDummy.generateDummyModules(courseId)
     private val moduleId = dummyModules[0].moduleId
 
+    @Mock
+    private lateinit var academyRepository: AcademyRepository
+
 
     @Before
     fun setUp() {
-        viewModel = CourseReaderViewModel()
+        viewModel = CourseReaderViewModel(academyRepository)
         viewModel.setSelectedCourse(courseId)
         viewModel.setSelectedModule(moduleId)
 
@@ -49,16 +76,22 @@ class CourseReaderViewModelTest {
 
     @Test
     fun getModules() {
+        `when`<ArrayList<ModuleEntity>>(academyRepository.getAllModulesByCourse(courseId))
+            .thenReturn(dummyModules)
         val moduleEntities = viewModel.getModule()
+        verify<AcademyRepository>(academyRepository).getAllModulesByCourse(courseId)
         assertNotNull(moduleEntities)
         assertEquals(7, moduleEntities.size.toLong())
     }
 
     @Test
     fun getSelectedModule() {
+        `when`(academyRepository.getContent(courseId,moduleId))
+            .thenReturn(dummyModules[0])
         val moduleEntity = viewModel.getSelectedModule()
         val contentEntity = moduleEntity.contentEntity
         val content = contentEntity?.content
+        verify(academyRepository).getContent(courseId, moduleId)
         assertNotNull(moduleEntity)
         assertNotNull(contentEntity)
         assertNotNull(content)

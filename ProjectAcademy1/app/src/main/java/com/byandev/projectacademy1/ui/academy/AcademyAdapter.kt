@@ -1,4 +1,4 @@
-package com.byandev.projectacademy1.ui.adapter
+package com.byandev.projectacademy1.ui.academy
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.byandev.projectacademy1.R
 import com.byandev.projectacademy1.data.source.local.entity.CourseEntity
-import com.byandev.projectacademy1.ui.activity.DetailCourseActivity
+import com.byandev.projectacademy1.ui.detail.DetailCourseActivity
 import kotlinx.android.synthetic.main.items_academy.view.*
 
 class AcademyAdapter : RecyclerView.Adapter<AcademyAdapter.Holder>() {

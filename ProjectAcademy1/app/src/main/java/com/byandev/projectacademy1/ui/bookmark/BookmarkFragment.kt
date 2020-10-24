@@ -1,4 +1,4 @@
-package com.byandev.projectacademy1.ui.fragments
+package com.byandev.projectacademy1.ui.bookmark
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,9 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.byandev.projectacademy1.R
 import com.byandev.projectacademy1.data.source.local.entity.CourseEntity
-import com.byandev.projectacademy1.ui.adapter.BookmarkAdapter
-import com.byandev.projectacademy1.ui.helper.BookmarkFragmentCallback
-import com.byandev.projectacademy1.ui.viewModels.BookmarkViewModel
 import com.byandev.projectacademy1.ui.viewModels.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_bookmark.*
 

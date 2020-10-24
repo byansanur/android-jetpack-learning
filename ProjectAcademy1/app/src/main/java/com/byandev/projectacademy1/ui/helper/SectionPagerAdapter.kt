@@ -6,8 +6,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.byandev.projectacademy1.R
-import com.byandev.projectacademy1.ui.fragments.AcademyFragment
-import com.byandev.projectacademy1.ui.fragments.BookmarkFragment
+import com.byandev.projectacademy1.ui.academy.AcademyFragment
+import com.byandev.projectacademy1.ui.bookmark.BookmarkFragment
 
 class SectionPagerAdapter(
     private val context: Context,

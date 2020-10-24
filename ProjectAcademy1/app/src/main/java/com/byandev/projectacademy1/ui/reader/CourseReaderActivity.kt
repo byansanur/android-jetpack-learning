@@ -1,13 +1,11 @@
-package com.byandev.projectacademy1.ui.activity
+package com.byandev.projectacademy1.ui.reader
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.byandev.projectacademy1.R
-import com.byandev.projectacademy1.ui.fragments.ModuleContentFragment
-import com.byandev.projectacademy1.ui.fragments.ModuleListFragment
-import com.byandev.projectacademy1.ui.helper.CourseReaderCallback
-import com.byandev.projectacademy1.ui.viewModels.CourseReaderViewModel
+import com.byandev.projectacademy1.ui.reader.content.ModuleContentFragment
+import com.byandev.projectacademy1.ui.reader.list.ModuleListFragment
 import com.byandev.projectacademy1.ui.viewModels.ViewModelFactory
 
 class CourseReaderActivity : AppCompatActivity(), CourseReaderCallback {

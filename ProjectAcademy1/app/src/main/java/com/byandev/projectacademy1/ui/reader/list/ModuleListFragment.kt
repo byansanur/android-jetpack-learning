@@ -1,4 +1,4 @@
-package com.byandev.projectacademy1.ui.fragments
+package com.byandev.projectacademy1.ui.reader.list
 
 import android.content.Context
 import android.os.Bundle
@@ -11,11 +11,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.byandev.projectacademy1.R
 import com.byandev.projectacademy1.data.source.local.entity.ModuleEntity
-import com.byandev.projectacademy1.ui.activity.CourseReaderActivity
-import com.byandev.projectacademy1.ui.adapter.ModuleListAdapter
-import com.byandev.projectacademy1.ui.adapter.MyAdapterClickListener
-import com.byandev.projectacademy1.ui.helper.CourseReaderCallback
-import com.byandev.projectacademy1.ui.viewModels.CourseReaderViewModel
+import com.byandev.projectacademy1.ui.reader.CourseReaderActivity
+import com.byandev.projectacademy1.ui.reader.CourseReaderCallback
+import com.byandev.projectacademy1.ui.reader.CourseReaderViewModel
 import com.byandev.projectacademy1.ui.viewModels.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_module_list.*
 
