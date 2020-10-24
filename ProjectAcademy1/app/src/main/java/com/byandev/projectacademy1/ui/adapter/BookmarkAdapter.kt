@@ -5,11 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.byandev.projectacademy1.R
-import com.byandev.projectacademy1.data.CourseEntity
+import com.byandev.projectacademy1.data.source.local.entity.CourseEntity
 import com.byandev.projectacademy1.ui.activity.DetailCourseActivity
 import com.byandev.projectacademy1.ui.helper.BookmarkFragmentCallback
 import kotlinx.android.synthetic.main.items_academy.view.img_poster
@@ -17,8 +16,7 @@ import kotlinx.android.synthetic.main.items_academy.view.tv_item_date
 import kotlinx.android.synthetic.main.items_academy.view.tv_item_description
 import kotlinx.android.synthetic.main.items_academy.view.tv_item_title
 import kotlinx.android.synthetic.main.items_bookmark.view.*
-
-import java.util.ArrayList
+import java.util.*
 
 class BookmarkAdapter(private val callback: BookmarkFragmentCallback) : RecyclerView.Adapter<BookmarkAdapter.CourseViewHolder>() {
     private val listCourses = ArrayList<CourseEntity>()

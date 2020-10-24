@@ -2,8 +2,6 @@ package com.byandev.projectacademy1.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -11,9 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.byandev.projectacademy1.R
-import com.byandev.projectacademy1.data.CourseEntity
+import com.byandev.projectacademy1.data.source.local.entity.CourseEntity
 import com.byandev.projectacademy1.ui.viewModels.DetailCourseViewModel
-import com.byandev.projectacademy1.utils.DataDummy
+import com.byandev.projectacademy1.ui.viewModels.ViewModelFactory
 import com.dicoding.academies.ui.detail.DetailCourseAdapter
 import kotlinx.android.synthetic.main.activity_detail_course.*
 import kotlinx.android.synthetic.main.content_detail_course.*
@@ -33,9 +31,10 @@ class DetailCourseActivity : AppCompatActivity() {
 
         val adapter = DetailCourseAdapter()
 
+        val factory = ViewModelFactory.getInstance(this)
         val viewModel = ViewModelProvider(
             this,
-            ViewModelProvider.NewInstanceFactory()
+            factory
         )[DetailCourseViewModel::class.java]
 
         val extras = intent.extras

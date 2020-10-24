@@ -1,19 +1,19 @@
 package com.byandev.projectacademy1.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ShareCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.byandev.projectacademy1.R
-import com.byandev.projectacademy1.data.CourseEntity
+import com.byandev.projectacademy1.data.source.local.entity.CourseEntity
 import com.byandev.projectacademy1.ui.adapter.BookmarkAdapter
 import com.byandev.projectacademy1.ui.helper.BookmarkFragmentCallback
 import com.byandev.projectacademy1.ui.viewModels.BookmarkViewModel
-import com.byandev.projectacademy1.utils.DataDummy
+import com.byandev.projectacademy1.ui.viewModels.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_bookmark.*
 
 /**
@@ -34,7 +34,8 @@ class BookmarkFragment : Fragment(),
         super.onActivityCreated(savedInstanceState)
         if (activity != null) {
 
-            val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[BookmarkViewModel::class.java]
+            val factory = ViewModelFactory.getInstance(requireActivity())
+            val viewModel = ViewModelProvider(this, factory)[BookmarkViewModel::class.java]
 
 //            val courses = DataDummy.generateDummyCourse()
             val courses = viewModel.getBookmark()

@@ -2,21 +2,21 @@ package com.byandev.projectacademy1.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.byandev.projectacademy1.R
-import com.byandev.projectacademy1.data.ModuleEntity
+import com.byandev.projectacademy1.data.source.local.entity.ModuleEntity
 import com.byandev.projectacademy1.ui.activity.CourseReaderActivity
-import com.byandev.projectacademy1.ui.helper.CourseReaderCallback
-import com.byandev.projectacademy1.utils.DataDummy
 import com.byandev.projectacademy1.ui.adapter.ModuleListAdapter
 import com.byandev.projectacademy1.ui.adapter.MyAdapterClickListener
+import com.byandev.projectacademy1.ui.helper.CourseReaderCallback
 import com.byandev.projectacademy1.ui.viewModels.CourseReaderViewModel
+import com.byandev.projectacademy1.ui.viewModels.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_module_list.*
 
 class ModuleListFragment : Fragment() , MyAdapterClickListener {
@@ -42,9 +42,11 @@ class ModuleListFragment : Fragment() , MyAdapterClickListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        val factory = ViewModelFactory.getInstance(requireActivity())
         viewModel = ViewModelProvider(
             requireActivity(),
-            ViewModelProvider.NewInstanceFactory()
+            factory
         )[CourseReaderViewModel::class.java]
         adapterList = ModuleListAdapter(this)
         populateRecyclerView(viewModel.getModule())

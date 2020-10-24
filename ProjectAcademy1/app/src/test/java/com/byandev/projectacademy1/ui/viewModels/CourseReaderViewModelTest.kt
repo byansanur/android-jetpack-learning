@@ -1,10 +1,10 @@
 package com.byandev.projectacademy1.ui.viewModels
 
-import com.byandev.projectacademy1.data.ContentEntity
+import com.byandev.projectacademy1.data.source.local.entity.ContentEntity
 import com.byandev.projectacademy1.utils.DataDummy
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
-
-import org.junit.Assert.*
 import org.junit.Test
 
 class CourseReaderViewModelTest {

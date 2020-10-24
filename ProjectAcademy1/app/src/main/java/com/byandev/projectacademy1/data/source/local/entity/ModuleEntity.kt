@@ -1,4 +1,4 @@
-package com.byandev.projectacademy1.data
+package com.byandev.projectacademy1.data.source.local.entity
 
 data class ModuleEntity(
         var moduleId: String,
