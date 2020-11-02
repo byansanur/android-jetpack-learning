@@ -2,7 +2,9 @@ package com.byandev.projectacademy1.ui.detail
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,10 +44,13 @@ class DetailCourseActivity : AppCompatActivity() {
             val courseId = extras.getString(EXTRA_COURSE)
             if (courseId != null) {
                 viewModel.setSelectedCourse(courseId)
-                val modules = viewModel.getModule()
-//                val modules = DataDummy.generateDummyModules(courseId)
-                adapter.setModules(modules)
-                populateCourse(viewModel.getCourse())
+                progress_bar.visibility = View.VISIBLE
+                viewModel.getModule().observe(this, Observer { modules ->
+                    progress_bar.visibility = View.GONE
+                    adapter.setModules(modules)
+                    adapter.notifyDataSetChanged()
+                })
+                viewModel.getCourse().observe(this, Observer { course -> populateCourse(course) })
 
             }
         }

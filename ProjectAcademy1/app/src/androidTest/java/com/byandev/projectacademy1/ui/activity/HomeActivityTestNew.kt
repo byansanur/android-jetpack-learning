@@ -66,6 +66,7 @@ class HomeActivityTestNew {
      */
     @Test
     fun loadCourse() {
+        delay2seconds()
         // test for load data with espresso
         Espresso.onView(ViewMatchers.withId(R.id.rv_academy))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
@@ -76,11 +77,13 @@ class HomeActivityTestNew {
 
     @Test
     fun loadDetailCourse() {
+        delay2seconds()
         // perform click terhadap item recyclerView click()
         Espresso.onView(ViewMatchers.withId(R.id.rv_academy)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0,
                 ViewActions.click()
             ))
+        delay2seconds()
         // check apakah text tampil dengan baik dengan isDisplay()
         Espresso.onView(ViewMatchers.withId(R.id.text_title))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
@@ -95,26 +98,33 @@ class HomeActivityTestNew {
 
     @Test
     fun loadModule() {
+        delay2seconds()
         Espresso.onView(ViewMatchers.withId(R.id.rv_academy)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0,
                 ViewActions.click()
             ))
+        delay2seconds()
         Espresso.onView(ViewMatchers.withId(R.id.btn_start)).perform(ViewActions.click())
+        delay2seconds()
         Espresso.onView(ViewMatchers.withId(R.id.rv_module))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
     @Test
     fun loadDetailModule() {
+        delay2seconds()
         Espresso.onView(ViewMatchers.withId(R.id.rv_academy)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0,
                 ViewActions.click()
             ))
+        delay2seconds()
         Espresso.onView(ViewMatchers.withId(R.id.btn_start)).perform(ViewActions.click())
+        delay2seconds()
         Espresso.onView(ViewMatchers.withId(R.id.rv_module)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0,
                 ViewActions.click()
             ))
+        delay2seconds()
         Espresso.onView(ViewMatchers.withId(R.id.web_view))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
@@ -122,9 +132,18 @@ class HomeActivityTestNew {
     @Test
     fun loadBookmarks() {
         Espresso.onView(ViewMatchers.withText(R.string.bookmark)).perform(ViewActions.click())
+        delay2seconds()
         Espresso.onView(ViewMatchers.withId(R.id.rv_bookmark))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.onView(ViewMatchers.withId(R.id.rv_bookmark))
             .perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyCourse.size))
+    }
+
+    private fun delay2seconds() {
+        try {
+            Thread.sleep(2000)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
     }
 }
