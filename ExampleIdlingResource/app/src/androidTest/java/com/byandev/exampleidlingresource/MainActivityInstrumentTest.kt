@@ -37,6 +37,9 @@ class MainActivityInstrumentTest {
         onView(withId(R.id.text_view)).check(matches(withText(mActivityRule.activity.getString(R.string.prepare))))
         onView(withText(mActivityRule.activity.getString(R.string.start))).perform(click())
         onView(withId(R.id.text_view)).check(matches(withText(mActivityRule.activity.getString(R.string.delay2))))
+
+
+        // note setelah test ini selesai maka hapus idling resource pada main activity karena menyebabkan memory leak
     }
 
 
