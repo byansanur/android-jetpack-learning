@@ -4,6 +4,7 @@ package com.byandev.projectacademy1.ui.activity
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso
+import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.contrib.RecyclerViewActions
@@ -12,6 +13,9 @@ import androidx.test.rule.ActivityTestRule
 import com.byandev.projectacademy1.R
 import com.byandev.projectacademy1.ui.home.HomeActivity
 import com.byandev.projectacademy1.utils.DataDummy
+import com.byandev.projectacademy1.utils.EspressoIdlingResource
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
@@ -58,6 +62,16 @@ class HomeActivityTestNew {
     @get:Rule
     var activityRule = ActivityTestRule(HomeActivity::class.java)
 
+    @Before
+    fun setUp() {
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.espressoTestIdlingResource)
+    }
+
+    @After
+    fun tearDown() {
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.espressoTestIdlingResource)
+    }
+
     /*
     Jika diperhartikan, di sini terdapat kode RecyclerViewActions yang digunakan untuk pengujian
     pada RecyclerView seperti scroll ke posisi tertentu dan klik pada posisi tertentu.
@@ -66,7 +80,6 @@ class HomeActivityTestNew {
      */
     @Test
     fun loadCourse() {
-        delay2seconds()
         // test for load data with espresso
         Espresso.onView(ViewMatchers.withId(R.id.rv_academy))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
@@ -77,13 +90,11 @@ class HomeActivityTestNew {
 
     @Test
     fun loadDetailCourse() {
-        delay2seconds()
         // perform click terhadap item recyclerView click()
         Espresso.onView(ViewMatchers.withId(R.id.rv_academy)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0,
                 ViewActions.click()
             ))
-        delay2seconds()
         // check apakah text tampil dengan baik dengan isDisplay()
         Espresso.onView(ViewMatchers.withId(R.id.text_title))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
@@ -98,33 +109,26 @@ class HomeActivityTestNew {
 
     @Test
     fun loadModule() {
-        delay2seconds()
         Espresso.onView(ViewMatchers.withId(R.id.rv_academy)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0,
                 ViewActions.click()
             ))
-        delay2seconds()
         Espresso.onView(ViewMatchers.withId(R.id.btn_start)).perform(ViewActions.click())
-        delay2seconds()
         Espresso.onView(ViewMatchers.withId(R.id.rv_module))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
     @Test
     fun loadDetailModule() {
-        delay2seconds()
         Espresso.onView(ViewMatchers.withId(R.id.rv_academy)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0,
                 ViewActions.click()
             ))
-        delay2seconds()
         Espresso.onView(ViewMatchers.withId(R.id.btn_start)).perform(ViewActions.click())
-        delay2seconds()
         Espresso.onView(ViewMatchers.withId(R.id.rv_module)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0,
                 ViewActions.click()
             ))
-        delay2seconds()
         Espresso.onView(ViewMatchers.withId(R.id.web_view))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
@@ -132,7 +136,6 @@ class HomeActivityTestNew {
     @Test
     fun loadBookmarks() {
         Espresso.onView(ViewMatchers.withText(R.string.bookmark)).perform(ViewActions.click())
-        delay2seconds()
         Espresso.onView(ViewMatchers.withId(R.id.rv_bookmark))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.onView(ViewMatchers.withId(R.id.rv_bookmark))
