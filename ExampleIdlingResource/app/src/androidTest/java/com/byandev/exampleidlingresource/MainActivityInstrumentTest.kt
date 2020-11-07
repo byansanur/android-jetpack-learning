@@ -21,6 +21,10 @@ class MainActivityInstrumentTest {
     @get:Rule
     var mActivityRule = ActivityTestRule(MainActivity::class.java)
 
+    /*
+    @Before digunakan untuk menyiapkan apa saja yang perlu disiapkan sebelum pengujian. Sedangkan
+    @After digunakan untuk memberi aksi setelah pengujian selesai. Kode di atas melakukan register dan unregister untuk Idling Resource.
+     */
     @Before
     fun setUp() {
         IdlingRegistry.getInstance().register(EspressoIdlingResource.getEspressoIdlingResource())
@@ -40,6 +44,13 @@ class MainActivityInstrumentTest {
 
 
         // note setelah test ini selesai maka hapus idling resource pada main activity karena menyebabkan memory leak
+        /*
+        Thread.sleep()
+        Selain menggunakan idling resource, Anda juga bisa menggunakan Thread.sleep untuk mengantisipasi proses asynchronous.
+        Namun hal ini tidak disarankan, karena tiap device memiliki waktu tunggu yang berbeda beda.
+        Bisa jadi 2 detik itu cukup di peranti A, namun di peranti b membutuhkan 5 detik.
+        Jadi untuk menangani proses asynchronous ini, tidak dapat dipastikan.
+         */
     }
 
 
