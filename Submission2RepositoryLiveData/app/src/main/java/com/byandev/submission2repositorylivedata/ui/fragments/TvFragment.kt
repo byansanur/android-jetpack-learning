@@ -5,9 +5,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
 import com.byandev.submission2repositorylivedata.R
+import com.byandev.submission2repositorylivedata.adapter.MovieAdapter
+import com.byandev.submission2repositorylivedata.adapter.TvAdapter
+import com.byandev.submission2repositorylivedata.data.repository.remote.TvResult
+import com.byandev.submission2repositorylivedata.ui.viewModel.MovieViewModel
+import com.byandev.submission2repositorylivedata.ui.viewModel.TvViewModel
+import com.byandev.submission2repositorylivedata.ui.viewModel.ViewModelFactory
+import kotlinx.android.synthetic.main.fragment_tv.*
 
 class TvFragment : Fragment() {
+
+    private lateinit var adapterTv: TvAdapter
+    private var tvLs = listOf<TvResult>()
+    private val tvViewModel by lazy {
+        val viewModelFactory = activity?.application?.let { ViewModelFactory.getInstance() }
+        ViewModelProviders.of(this, viewModelFactory).get(TvViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -19,5 +36,27 @@ class TvFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setRv()
+
+        tvViewModel.tv.observe(viewLifecycleOwner, Observer {
+            if (it.isNullOrEmpty()) {
+                imgNoData.visibility = View.VISIBLE
+                pbLoad.visibility = View.GONE
+            } else {
+                pbLoad.visibility = View.GONE
+                tvLs = it
+                adapterTv.addList(tvLs)
+            }
+        })
+    }
+
+    private fun setRv() {
+        adapterTv = TvAdapter(context)
+        adapterTv.notifyDataSetChanged()
+        rvList.apply {
+            adapter = adapterTv
+            layoutManager = GridLayoutManager(context, 2)
+        }
     }
 }
