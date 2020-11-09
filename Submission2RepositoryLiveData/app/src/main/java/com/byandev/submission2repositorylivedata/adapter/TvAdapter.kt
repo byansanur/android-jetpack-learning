@@ -1,6 +1,7 @@
 package com.byandev.submission2repositorylivedata.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.byandev.submission2repositorylivedata.R
 import com.byandev.submission2repositorylivedata.data.repository.remote.NowPlayingResult
 import com.byandev.submission2repositorylivedata.data.repository.remote.TvResult
+import com.byandev.submission2repositorylivedata.ui.DetailActivity
 import com.byandev.submission2repositorylivedata.utils.Constant.Companion.IMAGE_URL
 import com.byandev.submission2repositorylivedata.utils.ConvertDate
 import kotlinx.android.synthetic.main.imgae_rounded.view.*
@@ -33,6 +35,11 @@ class TvAdapter(private val context: Context?) : RecyclerView.Adapter<TvAdapter.
                     .into(imgThumb)
                 tvDate.text = ConvertDate.convertReleaseDate(tvList.first_air_date)
                 tvRating.text = tvList.vote_average.toString()
+                setOnClickListener {
+                    val intent = Intent(context, DetailActivity::class.java)
+                    intent.putExtra("idTvShow", tvList.id.toString())
+                    context?.startActivity(intent)
+                }
             }
         }
     }
