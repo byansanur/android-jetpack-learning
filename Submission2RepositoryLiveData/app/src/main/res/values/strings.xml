@@ -5,4 +5,5 @@
     <string name="hello_blank_fragment">hello_blank_fragment</string>
     <string name="todo">TODO</string>
     <string name="img_url">https://image.tmdb.org/t/p/w342</string>
+    <string name="share">Share</string>
 </resources>
