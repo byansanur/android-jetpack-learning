@@ -6,7 +6,6 @@ data class TvDetailResponse(
     val genres: List<GenreDetail>,
     val homepage: String,
     val id: Int,
-    val languages: List<String>,
     val name: String,
     val number_of_episodes: Int,
     val number_of_seasons: Int,

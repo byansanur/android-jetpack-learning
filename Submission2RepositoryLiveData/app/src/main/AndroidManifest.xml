@@ -17,7 +17,7 @@
         android:theme="@style/Theme.Submission2RepositoryLiveData"
         tools:ignore="AllowBackup"
         tools:targetApi="n">
-        <activity android:name=".ui.DetailActivity"></activity>
+        <activity android:name=".ui.DetailActivity"/>
         <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -15,20 +15,26 @@ import androidx.core.graphics.BlendModeCompat
 import androidx.core.view.ViewCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.byandev.submission2repositorylivedata.R
+import com.byandev.submission2repositorylivedata.adapter.GenreAdapter
 import com.byandev.submission2repositorylivedata.data.repository.remote.MovieDetail
 import com.byandev.submission2repositorylivedata.data.repository.remote.TvDetailResponse
 import com.byandev.submission2repositorylivedata.ui.viewModel.MovieViewModel
 import com.byandev.submission2repositorylivedata.ui.viewModel.TvViewModel
 import com.byandev.submission2repositorylivedata.ui.viewModel.ViewModelFactory
 import com.byandev.submission2repositorylivedata.utils.Constant
+import com.byandev.submission2repositorylivedata.utils.Constant.Companion.IMAGE_URL
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivity : AppCompatActivity() {
 
 
+    private lateinit var adapterGenre: GenreAdapter
     private lateinit var title: String
     private lateinit var homePageUrl: String
     private val movieViewModel by lazy {
@@ -57,14 +63,30 @@ class DetailActivity : AppCompatActivity() {
         }
 
 
+
+    }
+
+    private fun setRv() {
+        adapterGenre = GenreAdapter()
+        adapterGenre.notifyDataSetChanged()
+        rvListGenre.apply {
+            adapter = adapterGenre
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        }
     }
 
     private fun loadTvShowData(tvShow: TvDetailResponse?) {
         toolbar.title = tvShow?.name
         Glide.with(this)
-            .load("${Constant.IMAGE_URL}w342${tvShow?.poster_path}")
+            .load("${IMAGE_URL}w342${tvShow?.backdrop_path}")
             .into(app_bar_image)
 
+        Glide.with(this)
+            .load("${IMAGE_URL}w342${tvShow?.poster_path}")
+            .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
+            .into(imgPoster)
+
+        tvJudul.text = tvShow?.name
         title = tvShow?.name.toString()
         homePageUrl = tvShow?.homepage!!
 
@@ -76,11 +98,19 @@ class DetailActivity : AppCompatActivity() {
     private fun loadMovieData(movie: MovieDetail?) {
         toolbar.title = movie?.title
         Glide.with(this)
-            .load("${Constant.IMAGE_URL}w342${movie?.poster_path}")
+            .load("${IMAGE_URL}w342${movie?.backdrop_path}")
             .into(app_bar_image)
 
+        Glide.with(this)
+            .load("${IMAGE_URL}w342${movie?.poster_path}")
+            .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
+            .into(imgPoster)
+
+        tvJudul.text = movie?.title
         title = movie?.title.toString()
         homePageUrl = movie?.homepage!!
+
+        setRv()
 
         extended_fab.setOnClickListener {
             intentShare(title, homePageUrl)
