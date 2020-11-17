@@ -84,6 +84,40 @@ open class RemoteRepository {
         }, SERVICE_LATENCY_IN_MILLIS)
     }
 
+    fun getGenreDetailMovie(movieId: Long, getGenre: GetGenreCallback) {
+        val responseHandler = Handler()
+        responseHandler.postDelayed({
+            apiEndpoint.getDetailMovie(movieId).enqueue(object : Callback<MovieDetail> {
+                override fun onResponse(call: Call<MovieDetail>, response: Response<MovieDetail>) {
+                    response.body()?.let { getGenre.onResponse(it.genres) }
+                }
+
+                override fun onFailure(call: Call<MovieDetail>, t: Throwable) {
+                    getGenre.onErrorResponse()
+                    Log.e("getGenreDetailMovie", "onFailure: getGenreDetailMovie")
+                }
+
+            })
+        }, SERVICE_LATENCY_IN_MILLIS)
+    }
+
+    fun getGenreDetailTv(tvId: Long, getGenre: GetGenreCallback) {
+        val responseHandler = Handler()
+        responseHandler.postDelayed({
+            apiEndpoint.getDetailTv(tvId).enqueue(object :Callback<TvDetailResponse> {
+                override fun onResponse(call: Call<TvDetailResponse>, response: Response<TvDetailResponse>) {
+                    response.body()?.let { getGenre.onResponse(it.genres) }
+                }
+
+                override fun onFailure(call: Call<TvDetailResponse>, t: Throwable) {
+                    getGenre.onErrorResponse()
+                    Log.e("getGenreDetailTv", "onFailure: getGenreDetailTv")
+                }
+
+            })
+        }, SERVICE_LATENCY_IN_MILLIS)
+    }
+
     interface GetMovieCallback {
         fun onResponse(movieResponse: List<NowPlayingResult>)
         fun onErrorResponse()
@@ -101,6 +135,11 @@ open class RemoteRepository {
 
     interface GetTvShowDetailCallback{
         fun onResponse(tvShowsResponse : TvDetailResponse)
+        fun onErrorResponse()
+    }
+
+    interface GetGenreCallback {
+        fun onResponse(genreDetail: List<GenreDetail>)
         fun onErrorResponse()
     }
 

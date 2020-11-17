@@ -68,6 +68,36 @@ open class RepositoryApp(
         return tvDetail
     }
 
+    fun getGenreDetailMovie(movieId: Long): LiveData<List<GenreDetail>> {
+        val genre = MutableLiveData<List<GenreDetail>>()
+        remoteRepository.getGenreDetailMovie(movieId, object : RemoteRepository.GetGenreCallback {
+            override fun onResponse(genreDetail: List<GenreDetail>) {
+                genre.postValue(genreDetail)
+            }
+
+            override fun onErrorResponse() {
+                print("error to get genre movie")
+            }
+
+        })
+        return genre
+    }
+
+    fun getGenreDetailTv(tvId:Long) : LiveData<List<GenreDetail>> {
+        val genre = MutableLiveData<List<GenreDetail>>()
+        remoteRepository.getGenreDetailTv(tvId, object : RemoteRepository.GetGenreCallback {
+            override fun onResponse(genreDetail: List<GenreDetail>) {
+                genre.postValue(genreDetail)
+            }
+
+            override fun onErrorResponse() {
+                print("error to get genre tv")
+            }
+
+        })
+        return genre
+    }
+
     companion object {
         @Volatile
         private var instance: RepositoryApp? = null

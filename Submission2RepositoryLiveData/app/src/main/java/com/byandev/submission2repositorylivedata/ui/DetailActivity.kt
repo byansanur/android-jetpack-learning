@@ -9,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.core.app.ShareCompat
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat
@@ -21,7 +23,9 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.byandev.submission2repositorylivedata.R
 import com.byandev.submission2repositorylivedata.adapter.GenreAdapter
+import com.byandev.submission2repositorylivedata.data.repository.remote.GenreDetail
 import com.byandev.submission2repositorylivedata.data.repository.remote.MovieDetail
+import com.byandev.submission2repositorylivedata.data.repository.remote.NowPlayingResult
 import com.byandev.submission2repositorylivedata.data.repository.remote.TvDetailResponse
 import com.byandev.submission2repositorylivedata.ui.viewModel.MovieViewModel
 import com.byandev.submission2repositorylivedata.ui.viewModel.TvViewModel
@@ -35,6 +39,7 @@ class DetailActivity : AppCompatActivity() {
 
 
     private lateinit var adapterGenre: GenreAdapter
+    private var genre = listOf<GenreDetail>()
     private lateinit var title: String
     private lateinit var homePageUrl: String
     private val movieViewModel by lazy {
@@ -66,54 +71,80 @@ class DetailActivity : AppCompatActivity() {
 
     }
 
+    private fun loadTvShowData(tvShow: TvDetailResponse) {
+        toolbar.title = tvShow.name
+        Glide.with(this)
+            .load("${IMAGE_URL}w342${tvShow.backdrop_path}")
+            .into(app_bar_image)
+
+        Glide.with(this)
+            .load("${IMAGE_URL}w342${tvShow.poster_path}")
+            .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
+            .into(imgPoster)
+
+        tvJudul.text = tvShow.name
+        title = tvShow.name
+        homePageUrl = tvShow.homepage
+        tvVote.text = tvShow.vote_average.toString()
+        tvDesc.text = tvShow.overview
+        setRv()
+        tvShow.id.toLong().let {
+            tvViewModel.getGenresTv(it).observe(this, { list ->
+                if (list.isNullOrEmpty()) {
+                    Toast.makeText(this, "genre gak ada", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "sukses observer", Toast.LENGTH_SHORT).show()
+                    genre = list
+                    adapterGenre.addList(list)
+                }
+            })
+        }
+
+        extended_fab.setOnClickListener {
+            intentShare(title, homePageUrl)
+        }
+    }
+
+    private fun loadMovieData(movie: MovieDetail) {
+        toolbar.title = movie.title
+        Glide.with(this)
+            .load("${IMAGE_URL}w342${movie.backdrop_path}")
+            .into(app_bar_image)
+
+        Glide.with(this)
+            .load("${IMAGE_URL}w342${movie.poster_path}")
+            .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
+            .into(imgPoster)
+
+        tvJudul.text = movie.title
+        title = movie.original_title.toString()
+        homePageUrl = movie.homepage.toString()
+        tvVote.text = movie.vote_average.toString()
+        tvDesc.text = movie.overview
+        setRv()
+        movie.id?.toLong()?.let {
+            movieViewModel.getGenres(it).observe(this, { list ->
+                if (list.isNullOrEmpty()) {
+                Toast.makeText(this, "genre gak ada", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "sukses observer", Toast.LENGTH_SHORT).show()
+                genre = list
+                adapterGenre.addList(list)
+            }
+        })
+        }
+
+        extended_fab.setOnClickListener {
+            intentShare(title, homePageUrl)
+        }
+    }
+
     private fun setRv() {
         adapterGenre = GenreAdapter()
         adapterGenre.notifyDataSetChanged()
         rvListGenre.apply {
             adapter = adapterGenre
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        }
-    }
-
-    private fun loadTvShowData(tvShow: TvDetailResponse?) {
-        toolbar.title = tvShow?.name
-        Glide.with(this)
-            .load("${IMAGE_URL}w342${tvShow?.backdrop_path}")
-            .into(app_bar_image)
-
-        Glide.with(this)
-            .load("${IMAGE_URL}w342${tvShow?.poster_path}")
-            .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
-            .into(imgPoster)
-
-        tvJudul.text = tvShow?.name
-        title = tvShow?.name.toString()
-        homePageUrl = tvShow?.homepage!!
-
-        extended_fab.setOnClickListener {
-            intentShare(title, homePageUrl)
-        }
-    }
-
-    private fun loadMovieData(movie: MovieDetail?) {
-        toolbar.title = movie?.title
-        Glide.with(this)
-            .load("${IMAGE_URL}w342${movie?.backdrop_path}")
-            .into(app_bar_image)
-
-        Glide.with(this)
-            .load("${IMAGE_URL}w342${movie?.poster_path}")
-            .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
-            .into(imgPoster)
-
-        tvJudul.text = movie?.title
-        title = movie?.title.toString()
-        homePageUrl = movie?.homepage!!
-
-        setRv()
-
-        extended_fab.setOnClickListener {
-            intentShare(title, homePageUrl)
         }
     }
 
@@ -164,17 +195,5 @@ class DetailActivity : AppCompatActivity() {
                 View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
                         View.SYSTEM_UI_FLAG_LAYOUT_STABLE
         }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.detail_menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.shareMenu) {
-            intentShare(title,homePageUrl)
-        }
-        return super.onOptionsItemSelected(item)
     }
 }
