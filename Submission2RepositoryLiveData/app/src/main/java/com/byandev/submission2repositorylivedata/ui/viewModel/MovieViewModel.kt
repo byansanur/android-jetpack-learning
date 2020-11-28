@@ -5,13 +5,13 @@ import androidx.lifecycle.ViewModel
 import com.byandev.submission2repositorylivedata.data.repository.RepositoryApp
 import com.byandev.submission2repositorylivedata.data.repository.remote.GenreDetail
 import com.byandev.submission2repositorylivedata.data.repository.remote.MovieDetail
-import com.byandev.submission2repositorylivedata.data.repository.remote.NowPlayingResult
+import com.byandev.submission2repositorylivedata.data.repository.remote.MovieListResult
 
 class MovieViewModel(
     private val reposApp: RepositoryApp
 ) : ViewModel() {
 
-    val movie : LiveData<List<NowPlayingResult>> = reposApp.getMovie()
+    val movie : LiveData<List<MovieListResult>> = reposApp.getMovie()
 
     fun getMovieDetail(movieId: Long) : LiveData<MovieDetail> = reposApp.getMovieDetail(movieId)
 

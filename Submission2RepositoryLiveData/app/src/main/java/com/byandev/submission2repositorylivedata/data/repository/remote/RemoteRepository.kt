@@ -3,6 +3,7 @@ package com.byandev.submission2repositorylivedata.data.repository.remote
 import android.os.Handler
 import android.util.Log
 import com.byandev.submission2repositorylivedata.network.RetrofitConfig
+import com.byandev.submission2repositorylivedata.utils.EspressoIdlingResource
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -12,44 +13,48 @@ open class RemoteRepository {
     private val apiEndpoint = RetrofitConfig.getClient()
 
     fun getMovie(getMovieCallBack: GetMovieCallback) {
-
+        EspressoIdlingResource.increment()
         val responseHandler = Handler()
         responseHandler.postDelayed({
-            apiEndpoint.getMovie().enqueue(object : retrofit2.Callback<NowPlayingResponse> {
+            apiEndpoint.getMovie().enqueue(object : retrofit2.Callback<MovieListResponse> {
                 override fun onResponse(
-                    call: Call<NowPlayingResponse>,
-                    response: Response<NowPlayingResponse>
+                    call: Call<MovieListResponse>,
+                    response: Response<MovieListResponse>
                 ) {
                     getMovieCallBack.onResponse(response.body()?.results!!)
                 }
 
-                override fun onFailure(call: Call<NowPlayingResponse>, t: Throwable) {
+                override fun onFailure(call: Call<MovieListResponse>, t: Throwable) {
                     getMovieCallBack.onErrorResponse()
                     Log.e("getMovie", "onFailure: getMovie")
                 }
 
             })
+            EspressoIdlingResource.decrement()
         }, SERVICE_LATENCY_IN_MILLIS)
     }
 
     fun getTvShow(getTvShowCallback: GetTvShowCallback) {
+        EspressoIdlingResource.increment()
         val responseHandler = Handler()
         responseHandler.postDelayed({
-            apiEndpoint.getTv().enqueue(object : Callback<TvResponse> {
-                override fun onResponse(call: Call<TvResponse>, response: Response<TvResponse>) {
+            apiEndpoint.getTv().enqueue(object : Callback<TvListResponse> {
+                override fun onResponse(call: Call<TvListResponse>, response: Response<TvListResponse>) {
                     response.body()?.let { getTvShowCallback.onResponse(response.body()?.results!!) }
                 }
 
-                override fun onFailure(call: Call<TvResponse>, t: Throwable) {
+                override fun onFailure(call: Call<TvListResponse>, t: Throwable) {
                     getTvShowCallback.onErrorResponse()
                     Log.e("getTvShow", "onFailure: getTvShow")
                 }
 
             })
+            EspressoIdlingResource.decrement()
         }, SERVICE_LATENCY_IN_MILLIS)
     }
 
     fun getMovieDetail(movieId: Long, getMovieDetailCallback: GetMovieDetailCallback) {
+        EspressoIdlingResource.increment()
         val responseHandler = Handler()
         responseHandler.postDelayed({
             apiEndpoint.getDetailMovie(movieId).enqueue(object : Callback<MovieDetail> {
@@ -63,11 +68,13 @@ open class RemoteRepository {
                 }
 
             })
+            EspressoIdlingResource.decrement()
         }, SERVICE_LATENCY_IN_MILLIS)
     }
 
 
     fun getTvShowDetail(tvShow: Long, getTvShowDetailCallback: GetTvShowDetailCallback) {
+        EspressoIdlingResource.increment()
         val responseHandler = Handler()
         responseHandler.postDelayed({
             apiEndpoint.getDetailTv(tvShow).enqueue(object : Callback<TvDetailResponse> {
@@ -81,10 +88,12 @@ open class RemoteRepository {
                 }
 
             })
+            EspressoIdlingResource.decrement()
         }, SERVICE_LATENCY_IN_MILLIS)
     }
 
     fun getGenreDetailMovie(movieId: Long, getGenre: GetGenreCallback) {
+        EspressoIdlingResource.increment()
         val responseHandler = Handler()
         responseHandler.postDelayed({
             apiEndpoint.getDetailMovie(movieId).enqueue(object : Callback<MovieDetail> {
@@ -98,10 +107,12 @@ open class RemoteRepository {
                 }
 
             })
+            EspressoIdlingResource.decrement()
         }, SERVICE_LATENCY_IN_MILLIS)
     }
 
     fun getGenreDetailTv(tvId: Long, getGenre: GetGenreCallback) {
+        EspressoIdlingResource.increment()
         val responseHandler = Handler()
         responseHandler.postDelayed({
             apiEndpoint.getDetailTv(tvId).enqueue(object :Callback<TvDetailResponse> {
@@ -115,16 +126,17 @@ open class RemoteRepository {
                 }
 
             })
+            EspressoIdlingResource.decrement()
         }, SERVICE_LATENCY_IN_MILLIS)
     }
 
     interface GetMovieCallback {
-        fun onResponse(movieResponse: List<NowPlayingResult>)
+        fun onResponse(movieResponse: List<MovieListResult>)
         fun onErrorResponse()
     }
 
     interface GetTvShowCallback {
-        fun onResponse(tvShowResponse: List<TvResult>)
+        fun onResponse(tvShowResponse: List<TvListResult>)
         fun onErrorResponse()
     }
 

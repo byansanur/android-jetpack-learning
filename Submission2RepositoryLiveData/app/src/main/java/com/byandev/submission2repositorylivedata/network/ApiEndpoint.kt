@@ -1,9 +1,9 @@
 package com.byandev.submission2repositorylivedata.network
 
 import com.byandev.submission2repositorylivedata.data.repository.remote.MovieDetail
-import com.byandev.submission2repositorylivedata.data.repository.remote.NowPlayingResponse
+import com.byandev.submission2repositorylivedata.data.repository.remote.MovieListResponse
 import com.byandev.submission2repositorylivedata.data.repository.remote.TvDetailResponse
-import com.byandev.submission2repositorylivedata.data.repository.remote.TvResponse
+import com.byandev.submission2repositorylivedata.data.repository.remote.TvListResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -11,10 +11,10 @@ import retrofit2.http.Path
 interface ApiEndpoint {
 
     @GET("movie/popular")
-    fun getMovie() : Call<NowPlayingResponse>
+    fun getMovie() : Call<MovieListResponse>
 
     @GET("tv/popular")
-    fun getTv() : Call<TvResponse>
+    fun getTv() : Call<TvListResponse>
 
     @GET("tv/{tv_id}")
     fun getDetailTv(

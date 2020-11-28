@@ -1,6 +1,6 @@
 package com.byandev.submission2repositorylivedata.data.repository.remote
 
-data class TvResponse(
-    val results: List<TvResult>?
+data class TvListResponse(
+    val results: List<TvListResult>?
 )
 

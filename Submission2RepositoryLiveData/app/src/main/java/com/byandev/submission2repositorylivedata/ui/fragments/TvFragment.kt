@@ -9,10 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.byandev.submission2repositorylivedata.R
-import com.byandev.submission2repositorylivedata.adapter.MovieAdapter
 import com.byandev.submission2repositorylivedata.adapter.TvAdapter
-import com.byandev.submission2repositorylivedata.data.repository.remote.TvResult
-import com.byandev.submission2repositorylivedata.ui.viewModel.MovieViewModel
+import com.byandev.submission2repositorylivedata.data.repository.remote.TvListResult
 import com.byandev.submission2repositorylivedata.ui.viewModel.TvViewModel
 import com.byandev.submission2repositorylivedata.ui.viewModel.ViewModelFactory
 import com.faltenreich.skeletonlayout.Skeleton
@@ -22,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_tv.*
 class TvFragment : Fragment() {
 
     private lateinit var adapterTv: TvAdapter
-    private var tvLs = listOf<TvResult>()
+    private var tvLs = listOf<TvListResult>()
     private val tvViewModel by lazy {
         val viewModelFactory = activity?.application?.let { ViewModelFactory.getInstance() }
         ViewModelProviders.of(this, viewModelFactory).get(TvViewModel::class.java)
