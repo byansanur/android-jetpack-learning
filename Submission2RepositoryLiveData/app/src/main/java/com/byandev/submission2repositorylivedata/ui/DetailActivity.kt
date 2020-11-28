@@ -85,9 +85,7 @@ class DetailActivity : AppCompatActivity() {
         tvShow.id.toLong().let {
             skeleton?.showOriginal()
             tvViewModel.getGenresTv(it).observe(this, { list ->
-                if (list.isNullOrEmpty()) {
-                    Toast.makeText(this, "genre gak ada", Toast.LENGTH_SHORT).show()
-                } else {
+                if (!list.isNullOrEmpty()) {
                     Toast.makeText(this, "sukses observer", Toast.LENGTH_SHORT).show()
                     genre = list
                     adapterGenre.addList(list)
@@ -118,9 +116,7 @@ class DetailActivity : AppCompatActivity() {
         movie.id.toLong().let {
             skeleton?.showOriginal()
             movieViewModel.getGenres(it).observe(this, { list ->
-                if (list.isNullOrEmpty()) {
-                    Toast.makeText(this, "genre gak ada", Toast.LENGTH_SHORT).show()
-                } else {
+                if (!list.isNullOrEmpty()) {
                     Toast.makeText(this, "sukses observer", Toast.LENGTH_SHORT).show()
                     genre = list
                     adapterGenre.addList(list)
