@@ -9,22 +9,23 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.byandev.submission2repositorylivedata.R
-import com.byandev.submission2repositorylivedata.adapter.MovieAdapter
 import com.byandev.submission2repositorylivedata.adapter.TvAdapter
-import com.byandev.submission2repositorylivedata.data.repository.remote.TvResult
-import com.byandev.submission2repositorylivedata.ui.viewModel.MovieViewModel
+import com.byandev.submission2repositorylivedata.data.repository.remote.TvListResult
 import com.byandev.submission2repositorylivedata.ui.viewModel.TvViewModel
 import com.byandev.submission2repositorylivedata.ui.viewModel.ViewModelFactory
+import com.faltenreich.skeletonlayout.Skeleton
+import com.faltenreich.skeletonlayout.applySkeleton
 import kotlinx.android.synthetic.main.fragment_tv.*
 
 class TvFragment : Fragment() {
 
     private lateinit var adapterTv: TvAdapter
-    private var tvLs = listOf<TvResult>()
+    private var tvLs = listOf<TvListResult>()
     private val tvViewModel by lazy {
         val viewModelFactory = activity?.application?.let { ViewModelFactory.getInstance() }
         ViewModelProviders.of(this, viewModelFactory).get(TvViewModel::class.java)
     }
+    private var skeleton: Skeleton? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,9 +38,12 @@ class TvFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        pbLoad.visibility = View.GONE
         setRv()
-
+        skeleton = rvList.applySkeleton(R.layout.item_movie, 6)
+        skeleton?.showSkeleton()
         tvViewModel.tv.observe(viewLifecycleOwner, Observer {
+            skeleton?.showOriginal()
             if (it.isNullOrEmpty()) {
                 imgNoData.visibility = View.VISIBLE
                 pbLoad.visibility = View.GONE

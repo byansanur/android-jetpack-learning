@@ -23,7 +23,7 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
-        android:layout_height="400dp"
+        android:layout_height="300dp"
         android:layout_width="match_parent"
         android:fitsSystemWindows="true"
         android:background="@null">
@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:toolbarId="@+id/toolbar"
-            android:background="@color/blue_700"
+            android:background="@android:color/transparent"
             app:contentScrim="@color/blue_700"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:titleEnabled="false">
@@ -41,11 +41,22 @@
             <ImageView
                 android:id="@+id/app_bar_image"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="230dp"
                 app:layout_collapseMode="parallax"
                 android:fitsSystemWindows="true"
                 android:src="@android:drawable/sym_def_app_icon"
                 android:scaleType="centerCrop"
+                android:contentDescription="@string/todo" />
+
+            <ImageView
+                android:id="@+id/imgPoster"
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:src="@color/blue_700"
+                android:layout_marginBottom="16dp"
+                android:layout_marginStart="16dp"
+                app:layout_collapseMode="pin"
+                android:layout_gravity="bottom"
                 android:contentDescription="@string/todo" />
 
             <androidx.appcompat.widget.Toolbar
@@ -55,20 +66,91 @@
                 app:titleTextColor="@color/white"
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:layout_collapseMode="pin"/>
+
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
-
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".ui.DetailActivity">
+
+            <TextView
+                android:id="@+id/tvJudul"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="22sp"
+                tools:text="Judul"
+                android:layout_margin="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tvVote"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/tvVote"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                tools:text="4.5"
+                android:layout_marginEnd="16dp"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_rating_view"
+                android:paddingHorizontal="5dp"
+                android:paddingVertical="5dp"
+                android:drawablePadding="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvJudul"
+                app:layout_constraintBottom_toBottomOf="@id/tvJudul"
+                app:drawableStartCompat="@drawable/ic_round_star_rate_24" />
+
+
+            <TextView
+                android:id="@+id/tvGenre"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Genre"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="@id/tvJudul"
+                app:layout_constraintStart_toStartOf="@id/tvJudul"
+                app:layout_constraintTop_toBottomOf="@id/tvJudul"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvListGenre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvGenre"/>
+
+            <TextView
+                android:id="@+id/tvDesc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:textStyle="normal"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvListGenre"/>
+
+            <TextView
+                android:id="@+id/tvReleaseDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="17sp"
+                app:layout_constraintStart_toStartOf="@id/tvDesc"
+                app:layout_constraintTop_toBottomOf="@id/tvDesc"/>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

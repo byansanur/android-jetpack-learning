@@ -10,10 +10,10 @@ open class RepositoryApp(
     private val localRepo: LocalRepo,
     private val remoteRepository: RemoteRepository
 ) : DataSource {
-    override fun getMovie(): LiveData<List<NowPlayingResult>> {
-        val movieLists = MutableLiveData<List<NowPlayingResult>>()
+    override fun getMovie(): LiveData<List<MovieListResult>> {
+        val movieLists = MutableLiveData<List<MovieListResult>>()
         remoteRepository.getMovie(object  : RemoteRepository.GetMovieCallback {
-            override fun onResponse(movieResponse: List<NowPlayingResult>) {
+            override fun onResponse(movieResponse: List<MovieListResult>) {
                 movieLists.postValue(movieResponse)
             }
 
@@ -39,10 +39,10 @@ open class RepositoryApp(
         return movieDetail
     }
 
-    override fun getTvShow(): LiveData<List<TvResult>> {
-        val tvList = MutableLiveData<List<TvResult>>()
+    override fun getTvShow(): LiveData<List<TvListResult>> {
+        val tvList = MutableLiveData<List<TvListResult>>()
         remoteRepository.getTvShow(object  : RemoteRepository.GetTvShowCallback {
-            override fun onResponse(tvShowResponse: List<TvResult>) {
+            override fun onResponse(tvShowResponse: List<TvListResult>) {
                 tvList.postValue(tvShowResponse)
             }
 
@@ -66,6 +66,36 @@ open class RepositoryApp(
 
         })
         return tvDetail
+    }
+
+    fun getGenreDetailMovie(movieId: Long): LiveData<List<GenreDetail>> {
+        val genre = MutableLiveData<List<GenreDetail>>()
+        remoteRepository.getGenreDetailMovie(movieId, object : RemoteRepository.GetGenreCallback {
+            override fun onResponse(genreDetail: List<GenreDetail>) {
+                genre.postValue(genreDetail)
+            }
+
+            override fun onErrorResponse() {
+                print("error to get genre movie")
+            }
+
+        })
+        return genre
+    }
+
+    fun getGenreDetailTv(tvId:Long) : LiveData<List<GenreDetail>> {
+        val genre = MutableLiveData<List<GenreDetail>>()
+        remoteRepository.getGenreDetailTv(tvId, object : RemoteRepository.GetGenreCallback {
+            override fun onResponse(genreDetail: List<GenreDetail>) {
+                genre.postValue(genreDetail)
+            }
+
+            override fun onErrorResponse() {
+                print("error to get genre tv")
+            }
+
+        })
+        return genre
     }
 
     companion object {

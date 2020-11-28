@@ -2,32 +2,29 @@ package com.byandev.submission2repositorylivedata.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.byandev.submission2repositorylivedata.R
-import com.byandev.submission2repositorylivedata.data.repository.remote.NowPlayingResult
-import com.byandev.submission2repositorylivedata.data.repository.remote.TvResult
+import com.byandev.submission2repositorylivedata.data.repository.remote.TvListResult
 import com.byandev.submission2repositorylivedata.ui.DetailActivity
 import com.byandev.submission2repositorylivedata.utils.Constant.Companion.IMAGE_URL
 import com.byandev.submission2repositorylivedata.utils.ConvertDate
-import kotlinx.android.synthetic.main.imgae_rounded.view.*
 import kotlinx.android.synthetic.main.item_movie.view.*
 
 class TvAdapter(private val context: Context?) : RecyclerView.Adapter<TvAdapter.Holder>()  {
 
-    private var lsTv: List<TvResult> = emptyList()
-    fun addList(movie: List<TvResult>) {
+    private var lsTv: List<TvListResult> = emptyList()
+    fun addList(movie: List<TvListResult>) {
         this.lsTv = movie
         notifyDataSetChanged()
     }
 
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(tvList: TvResult) {
+        fun bind(tvList: TvListResult) {
             with(itemView) {
                 tvTitle.text = tvList.name
                 Glide.with(context)
