@@ -16,7 +16,7 @@ open class RemoteRepository {
         EspressoIdlingResource.increment()
         val responseHandler = Handler()
         responseHandler.postDelayed({
-            apiEndpoint.getMovie().enqueue(object : retrofit2.Callback<MovieListResponse> {
+            apiEndpoint.getMovie().enqueue(object : Callback<MovieListResponse> {
                 override fun onResponse(
                     call: Call<MovieListResponse>,
                     response: Response<MovieListResponse>
