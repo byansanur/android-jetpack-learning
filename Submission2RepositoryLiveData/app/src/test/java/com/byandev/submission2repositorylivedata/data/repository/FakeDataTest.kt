@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.byandev.submission2repositorylivedata.data.repository.local.LocalRepo
 import com.byandev.submission2repositorylivedata.data.repository.remote.*
-import com.byandev.submission2repositorylivedata.data.resource.DataSource
 
 open class FakeDataTest(
     private val localRepo: LocalRepo,
@@ -70,6 +69,36 @@ open class FakeDataTest(
 
         })
         return tvShowDetail
+    }
+
+    fun getGenre(id: Long) : LiveData<List<GenreDetail>> {
+        val genreDetails = MutableLiveData<List<GenreDetail>>()
+        remoteRepository.getGenreDetailMovie(id, object : RemoteRepository.GetGenreMovieCallback {
+            override fun onResponse(genreDetail: List<GenreDetail>) {
+                genreDetails.postValue(genreDetail)
+            }
+
+            override fun onErrorResponse() {
+                print("error get genre movie")
+            }
+
+        })
+        return genreDetails
+    }
+
+    fun getTvGenre(tvId: Long) : LiveData<List<GenreDetail>> {
+        val genreTv = MutableLiveData<List<GenreDetail>>()
+        remoteRepository.getGenreDetailTv(tvId, object : RemoteRepository.GetGenreTvCallback {
+            override fun onResponse(genreDetail: List<GenreDetail>) {
+                genreTv.postValue(genreDetail)
+            }
+
+            override fun onErrorResponse() {
+                print("error get genre tv show")
+            }
+
+        })
+        return genreTv
     }
 
 }

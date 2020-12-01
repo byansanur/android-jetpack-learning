@@ -1,4 +1,4 @@
-package com.byandev.submission2repositorylivedata.data
+package com.byandev.submission2repositorylivedata.data.repository.local
 
 data class MovieEntity (
     var movieId: String,

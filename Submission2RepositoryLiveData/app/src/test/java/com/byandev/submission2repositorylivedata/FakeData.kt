@@ -1,7 +1,6 @@
 package com.byandev.submission2repositorylivedata
 
-import com.byandev.submission2repositorylivedata.data.repository.remote.MovieDetail
-import com.byandev.submission2repositorylivedata.data.repository.remote.MovieListResult
+import com.byandev.submission2repositorylivedata.data.repository.remote.*
 
 object FakeData {
     fun generateDummyRemoteMovie(): List<MovieListResult> {
@@ -57,6 +56,74 @@ object FakeData {
         )
     }
 
+    fun generateDummyTvShow(): List<TvListResult> {
+        return listOf(
+            TvListResult(
+                "",
+                "dfsdsff",
+                emptyList(),
+                1L,
+                "name",
+                emptyList(),
+                "en",
+                "sdfsdf",
+                "goof",
+                5.5,
+                "abcde",
+                10.0,
+                5
+            ),
+            TvListResult(
+                "",
+                "dfsdsff",
+                emptyList(),
+                2L,
+                "name",
+                emptyList(),
+                "en",
+                "sdfsdf",
+                "goof",
+                5.5,
+                "abcde",
+                10.0,
+                5
+            ),
+            TvListResult(
+                "",
+                "dfsdsff",
+                emptyList(),
+                3L,
+                "name",
+                emptyList(),
+                "en",
+                "sdfsdf",
+                "goof",
+                5.5,
+                "abcde",
+                10.0,
+                5
+            )
+        )
+    }
+
+    fun getDummyTvShowDetail() : TvDetailResponse {
+        return TvDetailResponse(
+            "",
+            "dfsdsff",
+            emptyList(),
+            "fjdsfkj",
+            1,
+            "fsdff",
+            3,
+            1,
+            "en",
+            "abcde",
+            10.0,
+            "",
+            10.0
+        )
+    }
+
     fun getDummyMovieDetail() : MovieDetail {
         return MovieDetail(
             "dfsdsff",
@@ -77,5 +144,33 @@ object FakeData {
             "abcde",
             3.0
         )
+    }
+
+    fun generateGenreMovie(movieId: Long) : List<GenreDetail> {
+        val genreDetail = ArrayList<GenreDetail>()
+        genreDetail.add(
+            GenreDetail(
+                movieId.toInt(),
+                "action"
+            )
+        )
+        return genreDetail
+    }
+
+    fun generateGenreTv(tvId: Long) : List<GenreDetail> {
+        val genreDetail = ArrayList<GenreDetail>()
+        genreDetail.add(
+            GenreDetail(
+                tvId.toInt(),
+                "action"
+            )
+        )
+        genreDetail.add(
+            GenreDetail(
+                tvId.toInt(),
+                "opera"
+            )
+        )
+        return genreDetail
     }
 }

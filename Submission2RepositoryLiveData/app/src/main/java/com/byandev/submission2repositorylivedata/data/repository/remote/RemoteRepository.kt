@@ -92,17 +92,17 @@ open class RemoteRepository {
         }, SERVICE_LATENCY_IN_MILLIS)
     }
 
-    fun getGenreDetailMovie(movieId: Long, getGenre: GetGenreCallback) {
+    fun getGenreDetailMovie(movieId: Long, getGenreMovie: GetGenreMovieCallback) {
         EspressoIdlingResource.increment()
         val responseHandler = Handler()
         responseHandler.postDelayed({
             apiEndpoint.getDetailMovie(movieId).enqueue(object : Callback<MovieDetail> {
                 override fun onResponse(call: Call<MovieDetail>, response: Response<MovieDetail>) {
-                    response.body()?.let { getGenre.onResponse(it.genres) }
+                    response.body()?.let { getGenreMovie.onResponse(it.genres) }
                 }
 
                 override fun onFailure(call: Call<MovieDetail>, t: Throwable) {
-                    getGenre.onErrorResponse()
+                    getGenreMovie.onErrorResponse()
                     Log.e("getGenreDetailMovie", "onFailure: getGenreDetailMovie")
                 }
 
@@ -111,7 +111,7 @@ open class RemoteRepository {
         }, SERVICE_LATENCY_IN_MILLIS)
     }
 
-    fun getGenreDetailTv(tvId: Long, getGenre: GetGenreCallback) {
+    fun getGenreDetailTv(tvId: Long, getGenre: GetGenreTvCallback) {
         EspressoIdlingResource.increment()
         val responseHandler = Handler()
         responseHandler.postDelayed({
@@ -150,7 +150,12 @@ open class RemoteRepository {
         fun onErrorResponse()
     }
 
-    interface GetGenreCallback {
+    interface GetGenreMovieCallback {
+        fun onResponse(genreDetail: List<GenreDetail>)
+        fun onErrorResponse()
+    }
+
+    interface GetGenreTvCallback {
         fun onResponse(genreDetail: List<GenreDetail>)
         fun onErrorResponse()
     }

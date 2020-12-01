@@ -1,4 +1,4 @@
-package com.byandev.submission2repositorylivedata
+package com.byandev.submission2repositorylivedata.utils
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
