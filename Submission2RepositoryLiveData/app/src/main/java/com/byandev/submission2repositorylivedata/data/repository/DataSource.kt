@@ -1,4 +1,4 @@
-package com.byandev.submission2repositorylivedata.data.resource
+package com.byandev.submission2repositorylivedata.data.repository
 
 import androidx.lifecycle.LiveData
 import com.byandev.submission2repositorylivedata.data.repository.remote.MovieDetail

@@ -4,9 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.byandev.submission2repositorylivedata.data.repository.local.LocalRepo
 import com.byandev.submission2repositorylivedata.data.repository.remote.*
-import com.byandev.submission2repositorylivedata.data.resource.DataSource
 
-open class RepositoryApp(
+open class DataRepository(
     private val localRepo: LocalRepo,
     private val remoteRepository: RemoteRepository
 ) : DataSource {
@@ -70,7 +69,7 @@ open class RepositoryApp(
 
     fun getGenreDetailMovie(movieId: Long): LiveData<List<GenreDetail>> {
         val genre = MutableLiveData<List<GenreDetail>>()
-        remoteRepository.getGenreDetailMovie(movieId, object : RemoteRepository.GetGenreCallback {
+        remoteRepository.getGenreDetailMovie(movieId, object : RemoteRepository.GetGenreMovieCallback {
             override fun onResponse(genreDetail: List<GenreDetail>) {
                 genre.postValue(genreDetail)
             }
@@ -85,7 +84,7 @@ open class RepositoryApp(
 
     fun getGenreDetailTv(tvId:Long) : LiveData<List<GenreDetail>> {
         val genre = MutableLiveData<List<GenreDetail>>()
-        remoteRepository.getGenreDetailTv(tvId, object : RemoteRepository.GetGenreCallback {
+        remoteRepository.getGenreDetailTv(tvId, object : RemoteRepository.GetGenreTvCallback {
             override fun onResponse(genreDetail: List<GenreDetail>) {
                 genre.postValue(genreDetail)
             }
@@ -100,12 +99,12 @@ open class RepositoryApp(
 
     companion object {
         @Volatile
-        private var instance: RepositoryApp? = null
-        fun getInstance(localRepo: LocalRepo, remoteRepository: RemoteRepository) : RepositoryApp? {
+        private var instance: DataRepository? = null
+        fun getInstance(localRepo: LocalRepo, remoteRepository: RemoteRepository) : DataRepository? {
             if (instance == null) {
                 synchronized(this) {
                     if (instance == null) {
-                        instance = RepositoryApp(localRepo, remoteRepository)
+                        instance = DataRepository(localRepo, remoteRepository)
                     }
                 }
             }

@@ -2,22 +2,22 @@ package com.byandev.submission2repositorylivedata.ui.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.byandev.submission2repositorylivedata.data.repository.RepositoryApp
+import com.byandev.submission2repositorylivedata.data.repository.DataRepository
 import com.byandev.submission2repositorylivedata.di.Injection
 
 @Suppress("UNCHECKED_CAST")
 class ViewModelFactory(
-    private val reposApp: RepositoryApp
+    private val dataRepository: DataRepository
 ) : ViewModelProvider.Factory {
 
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return when {
             modelClass.isAssignableFrom(MovieViewModel::class.java) -> {
-                MovieViewModel(reposApp) as T
+                MovieViewModel(dataRepository) as T
             }
             modelClass.isAssignableFrom(TvViewModel::class.java) -> {
-                TvViewModel(reposApp) as T
+                TvViewModel(dataRepository) as T
             }
             else -> throw Throwable("Unknow viewModel class" + modelClass.name)
         }
