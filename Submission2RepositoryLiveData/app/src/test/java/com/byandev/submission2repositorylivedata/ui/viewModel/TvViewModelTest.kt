@@ -22,7 +22,7 @@ class TvViewModelTest {
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private var viewModel: TvViewModel? = null
-    private var data = Mockito.mock(DataRepository::class.java)
+    private var dataRepository = Mockito.mock(DataRepository::class.java)
     private lateinit var tvLs: TvListResult
 
     @Mock
@@ -30,7 +30,7 @@ class TvViewModelTest {
 
     @Before
     fun setUp() {
-        viewModel = TvViewModel(data)
+        viewModel = TvViewModel(dataRepository)
         tvLs = TvListResult(
             "",
             "dfsdsff",
@@ -52,19 +52,19 @@ class TvViewModelTest {
     fun getTvShow() {
         val tvLs = MutableLiveData<List<TvListResult>>()
         tvLs.value = FakeData.generateDummyTvShow()
-        Mockito.`when`(data.getTvShow()).thenReturn(tvLs)
+        Mockito.`when`(dataRepository.getTvShow()).thenReturn(tvLs)
         viewModel?.tv?.observeForever(observer)
-        verify(data).getTvShow()
+        verify(dataRepository).getTvShow()
     }
 
     @Test
     fun getTvShowDetail() {
         val tvShow = MutableLiveData<TvDetailResponse>()
         tvShow.value = FakeData.getDummyTvShowDetail()
-        Mockito.`when`(data.getTvShowDetail(tvShow.value!!.id.toLong())).thenReturn(tvShow)
+        Mockito.`when`(dataRepository.getTvShowDetail(tvShow.value!!.id.toLong())).thenReturn(tvShow)
         val observer = Mockito.mock(Observer::class.java)
         viewModel?.getTvDetail(tvShow.value!!.id.toLong())?.observeForever(observer as Observer<in TvDetailResponse>)
-        verify(data).getTvShowDetail(tvShow.value!!.id.toLong())
+        verify(dataRepository).getTvShowDetail(tvShow.value!!.id.toLong())
         assertEquals(
             tvShow.value?.id,
             tvShow.value?.id?.let { viewModel?.getTvDetail(it.toLong())?.value?.id }
@@ -83,9 +83,9 @@ class TvViewModelTest {
     fun getGenre() {
         val genre = MutableLiveData<List<GenreDetail>>()
         genre.value = FakeData.generateGenreTv(tvLs.id)
-        Mockito.`when`(data.getGenreDetailTv(tvLs.id)).thenReturn(genre)
+        Mockito.`when`(dataRepository.getGenreDetailTv(tvLs.id)).thenReturn(genre)
         val observer = Mockito.mock(Observer::class.java)
         viewModel?.getGenresTv(tvLs.id)?.observeForever(observer as Observer<in List<GenreDetail>>)
-        verify(data).getGenreDetailTv(tvLs.id)
+        verify(dataRepository).getGenreDetailTv(tvLs.id)
     }
 }

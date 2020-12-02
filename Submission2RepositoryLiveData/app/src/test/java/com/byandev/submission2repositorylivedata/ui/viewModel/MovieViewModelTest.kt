@@ -25,7 +25,7 @@ class MovieViewModelTest {
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private var viewModel: MovieViewModel? = null
-    private var data = mock(DataRepository::class.java)
+    private var dataRepository = mock(DataRepository::class.java)
     private lateinit var movieLs: MovieListResult
 
     @Mock
@@ -34,7 +34,7 @@ class MovieViewModelTest {
 
     @Before
     fun setUp() {
-        viewModel = MovieViewModel(data)
+        viewModel = MovieViewModel(dataRepository)
         movieLs = MovieListResult(
             false,
             "dfsdsff",
@@ -57,19 +57,19 @@ class MovieViewModelTest {
     fun getMovie() {
         val movieLs = MutableLiveData<List<MovieListResult>>()
         movieLs.value = FakeData.generateDummyRemoteMovie()
-        `when`(data.getMovie()).thenReturn(movieLs)
+        `when`(dataRepository.getMovie()).thenReturn(movieLs)
         viewModel?.movie?.observeForever(observer)
-        verify(data).getMovie()
+        verify(dataRepository).getMovie()
     }
 
     @Test
     fun getMovieDetail() {
         val movie = MutableLiveData<MovieDetail>()
         movie.value = FakeData.getDummyMovieDetail()
-        `when`(data.getMovieDetail(movie.value!!.id.toLong())).thenReturn(movie)
+        `when`(dataRepository.getMovieDetail(movie.value!!.id.toLong())).thenReturn(movie)
         val observer = mock(Observer::class.java)
         viewModel?.getMovieDetail(movie.value!!.id.toLong())?.observeForever(observer as Observer<in MovieDetail>)
-        verify(data).getMovieDetail(movie.value!!.id.toLong())
+        verify(dataRepository).getMovieDetail(movie.value!!.id.toLong())
         assertEquals(
             movie.value?.id,
             movie.value?.id?.let { viewModel?.getMovieDetail(it.toLong())?.value?.id }
@@ -88,9 +88,9 @@ class MovieViewModelTest {
     fun getGenre() {
         val genre = MutableLiveData<List<GenreDetail>>()
         genre.value = FakeData.generateGenreMovie(movieLs.id)
-        `when`(data.getGenreDetailMovie(movieLs.id)).thenReturn(genre)
+        `when`(dataRepository.getGenreDetailMovie(movieLs.id)).thenReturn(genre)
         val observer = mock(Observer::class.java)
         viewModel?.getGenres(movieLs.id)?.observeForever(observer as Observer<in List<GenreDetail>>)
-        verify(data).getGenreDetailMovie(movieId = movieLs.id)
+        verify(dataRepository).getGenreDetailMovie(movieId = movieLs.id)
     }
 }

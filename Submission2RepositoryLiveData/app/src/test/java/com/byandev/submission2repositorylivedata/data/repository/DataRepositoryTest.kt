@@ -38,8 +38,8 @@ class DataRepositoryTest {
 
     @Test
     fun getMovie() {
-        doAnswer {invocation ->
-            (invocation.arguments[0] as RemoteRepository.GetMovieCallback)
+        doAnswer {invocationOnMock ->
+            (invocationOnMock.arguments[0] as RemoteRepository.GetMovieCallback)
                 .onResponse(movieLs)
             null
         }.`when`(remoteRepo).getMovie(any())
