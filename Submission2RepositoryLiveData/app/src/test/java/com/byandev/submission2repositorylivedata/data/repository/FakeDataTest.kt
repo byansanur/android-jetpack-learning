@@ -2,12 +2,10 @@ package com.byandev.submission2repositorylivedata.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.byandev.submission2repositorylivedata.data.repository.local.LocalRepo
 import com.byandev.submission2repositorylivedata.data.repository.remote.*
 
 open class FakeDataTest(
-    private val localRepo: LocalRepo,
-    private val remoteRepository: RemoteRepository
+        private val remoteRepository: RemoteRepository
 ) : DataSource {
 
     override fun getMovie(): LiveData<List<MovieListResult>> {

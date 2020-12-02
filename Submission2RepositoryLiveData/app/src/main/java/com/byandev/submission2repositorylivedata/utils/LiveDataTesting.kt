@@ -1,3 +1,5 @@
+@file:Suppress("UNCHECKED_CAST")
+
 package com.byandev.submission2repositorylivedata.utils
 
 import androidx.lifecycle.LiveData

@@ -22,8 +22,7 @@ import org.junit.Test
 class MainActivityTest {
 
 
-    @Rule
-    @JvmField
+    @get:Rule
     var activityRule = ActivityTestRule(MainActivity::class.java)
 
     @Before

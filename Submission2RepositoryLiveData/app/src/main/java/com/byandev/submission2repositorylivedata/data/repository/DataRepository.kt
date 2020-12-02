@@ -2,12 +2,10 @@ package com.byandev.submission2repositorylivedata.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.byandev.submission2repositorylivedata.data.repository.local.LocalRepo
 import com.byandev.submission2repositorylivedata.data.repository.remote.*
 
 open class DataRepository(
-    private val localRepo: LocalRepo,
-    private val remoteRepository: RemoteRepository
+        private val remoteRepository: RemoteRepository
 ) : DataSource {
     override fun getMovie(): LiveData<List<MovieListResult>> {
         val movieLists = MutableLiveData<List<MovieListResult>>()
@@ -100,11 +98,11 @@ open class DataRepository(
     companion object {
         @Volatile
         private var instance: DataRepository? = null
-        fun getInstance(localRepo: LocalRepo, remoteRepository: RemoteRepository) : DataRepository? {
+        fun getInstance(remoteRepository: RemoteRepository) : DataRepository? {
             if (instance == null) {
                 synchronized(this) {
                     if (instance == null) {
-                        instance = DataRepository(localRepo, remoteRepository)
+                        instance = DataRepository(remoteRepository)
                     }
                 }
             }
