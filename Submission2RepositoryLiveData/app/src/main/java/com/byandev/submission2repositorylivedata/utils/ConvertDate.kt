@@ -13,14 +13,16 @@ class ConvertDate {
             val timeZone: TimeZone = TimeZone.getDefault()
             val timeZoneConvert : TimeZone = TimeZone.getTimeZone("Asia/Jakarta")
 
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             val dateConvert = SimpleDateFormat("MMM dd, yyyy")
             dateFormat.timeZone = timeZone
             dateConvert.timeZone = timeZoneConvert
 
             var dateOri = Calendar.getInstance().time
             try {
-                dateOri = dateFormat.parse(date)
+                dateFormat.parse(date)?.let {
+                    dateOri = it
+                }
             } catch (e: ParseException) {
                 e.printStackTrace()
             }
