@@ -3,6 +3,8 @@ package com.byandev.roomexample.ui.main
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.byandev.roomexample.R
 import com.byandev.roomexample.databases.Note
 import com.byandev.roomexample.databinding.ActivityMainBinding
+import com.byandev.roomexample.helper.SortUtils
 import com.byandev.roomexample.ui.ViewModelFactory
 import com.byandev.roomexample.ui.adapter.NoteAdapter
 import com.byandev.roomexample.ui.adapter.NotePagedListAdapter
@@ -23,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     private var _activityMainBinding: ActivityMainBinding? = null
     private val binding get() = _activityMainBinding
     private lateinit var adapter: NotePagedListAdapter
+    private lateinit var mainViewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,8 +34,8 @@ class MainActivity : AppCompatActivity() {
         _activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
-        val mainViewModel = obtainViewModel(this@MainActivity)
-        mainViewModel.getAllNotes().observe(this, noteObserver)
+        mainViewModel = obtainViewModel(this@MainActivity)
+        mainViewModel.getAllNotes(SortUtils.NEWEST).observe(this, noteObserver)
 
         adapter = NotePagedListAdapter(this@MainActivity)
         binding?.rvNotes?.layoutManager = LinearLayoutManager(this)
@@ -60,6 +64,23 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        var sort = ""
+        when (item.itemId) {
+            R.id.action_newest -> sort = SortUtils.NEWEST
+            R.id.action_oldest -> sort = SortUtils.OLDEST
+            R.id.action_random -> sort = SortUtils.RANDOM
+        }
+        mainViewModel.getAllNotes(sort).observe(this, noteObserver)
+        item.isChecked = true
+        return super.onOptionsItemSelected(item)
     }
 
     private fun showSnackBarMessage(message: String) {
