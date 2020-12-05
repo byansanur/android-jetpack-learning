@@ -6,12 +6,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.paging.PagedList
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.byandev.roomexample.R
 import com.byandev.roomexample.databases.Note
 import com.byandev.roomexample.databinding.ActivityMainBinding
 import com.byandev.roomexample.ui.ViewModelFactory
 import com.byandev.roomexample.ui.adapter.NoteAdapter
+import com.byandev.roomexample.ui.adapter.NotePagedListAdapter
 import com.byandev.roomexample.ui.insert.NoteAddUpdateActivity
 import com.google.android.material.snackbar.Snackbar
 
@@ -19,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private var _activityMainBinding: ActivityMainBinding? = null
     private val binding get() = _activityMainBinding
-    private lateinit var adapter: NoteAdapter
+    private lateinit var adapter: NotePagedListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         val mainViewModel = obtainViewModel(this@MainActivity)
         mainViewModel.getAllNotes().observe(this, noteObserver)
 
-        adapter = NoteAdapter(this@MainActivity)
+        adapter = NotePagedListAdapter(this@MainActivity)
         binding?.rvNotes?.layoutManager = LinearLayoutManager(this)
         binding?.rvNotes?.setHasFixedSize(true)
         binding?.rvNotes?.adapter = adapter
@@ -72,9 +75,9 @@ class MainActivity : AppCompatActivity() {
         val factory = ViewModelFactory.getInstance(activity.application)
         return ViewModelProvider(activity, factory).get(MainViewModel::class.java)
     }
-    private val noteObserver = Observer<List<Note>> { noteList ->
+    private val noteObserver = Observer<PagedList<Note>> { noteList ->
         if (noteList != null) {
-            adapter.setListNotes(noteList)
+            adapter.submitList(noteList)
         }
     }
 }
