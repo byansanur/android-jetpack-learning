@@ -148,11 +148,4 @@ class HomeActivityTestNew {
         onView(isRoot()).perform(ViewActions.pressBack())
     }
 
-    private fun delay2seconds() {
-        try {
-            Thread.sleep(2000)
-        } catch (e: InterruptedException) {
-            e.printStackTrace()
-        }
-    }
 }
