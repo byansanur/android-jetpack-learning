@@ -31,11 +31,9 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.getAllNotes().observe(this, noteObserver)
 
         adapter = NoteAdapter(this@MainActivity)
-        binding?.rvNotes?.apply {
-            layoutManager = LinearLayoutManager(this@MainActivity)
-            setHasFixedSize(true)
-            adapter = adapter
-        }
+        binding?.rvNotes?.layoutManager = LinearLayoutManager(this)
+        binding?.rvNotes?.setHasFixedSize(true)
+        binding?.rvNotes?.adapter = adapter
         binding?.fabAdd?.setOnClickListener { v ->
             if (v.id == R.id.fab_add) {
                 val intent = Intent(this@MainActivity, NoteAddUpdateActivity::class.java)
