@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +16,7 @@ import com.byandev.projectacademy1.ui.reader.CourseReaderActivity
 import com.byandev.projectacademy1.ui.reader.CourseReaderCallback
 import com.byandev.projectacademy1.ui.reader.CourseReaderViewModel
 import com.byandev.projectacademy1.ui.viewModels.ViewModelFactory
+import com.byandev.projectacademy1.value_object.Status
 import kotlinx.android.synthetic.main.fragment_module_list.*
 
 class ModuleListFragment : Fragment() , MyAdapterClickListener {
@@ -49,10 +50,21 @@ class ModuleListFragment : Fragment() , MyAdapterClickListener {
         )[CourseReaderViewModel::class.java]
         adapterList = ModuleListAdapter(this)
 
-        progress_bar.visibility = View.VISIBLE
-        viewModel.getModule().observe(this, Observer{ modules ->
-            progress_bar.visibility = View.GONE
-            populateRecyclerView(modules)
+
+        viewModel.modules.observe(this, { moduleEntities ->
+            if (moduleEntities != null) {
+                when (moduleEntities.status) {
+                    Status.LOADING -> progress_bar?.visibility = View.VISIBLE
+                    Status.SUCCESS -> {
+                        progress_bar?.visibility = View.GONE
+                        populateRecyclerView(moduleEntities.data as List<ModuleEntity>)
+                    }
+                    Status.ERROR -> {
+                        progress_bar?.visibility = View.GONE
+                        Toast.makeText(context, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
         })
     }
 

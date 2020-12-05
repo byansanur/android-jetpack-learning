@@ -3,12 +3,13 @@
 package com.byandev.projectacademy1.ui.activity
 
 import androidx.recyclerview.widget.RecyclerView
-import androidx.test.espresso.Espresso
+import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions
-import androidx.test.espresso.assertion.ViewAssertions
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
-import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.rule.ActivityTestRule
 import com.byandev.projectacademy1.R
 import com.byandev.projectacademy1.ui.home.HomeActivity
@@ -81,9 +82,9 @@ class HomeActivityTestNew {
     @Test
     fun loadCourse() {
         // test for load data with espresso
-        Espresso.onView(ViewMatchers.withId(R.id.rv_academy))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withId(R.id.rv_academy))
+        onView(withId(R.id.rv_academy))
+            .check(matches(isDisplayed()))
+        onView(withId(R.id.rv_academy))
             .perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyCourse.size))
 
     }
@@ -91,55 +92,60 @@ class HomeActivityTestNew {
     @Test
     fun loadDetailCourse() {
         // perform click terhadap item recyclerView click()
-        Espresso.onView(ViewMatchers.withId(R.id.rv_academy)).perform(
+        onView(withId(R.id.rv_academy)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0,
-                ViewActions.click()
+                click()
             ))
         // check apakah text tampil dengan baik dengan isDisplay()
-        Espresso.onView(ViewMatchers.withId(R.id.text_title))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withId(R.id.text_date))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(withId(R.id.text_title))
+            .check(matches(isDisplayed()))
+        onView(withId(R.id.text_date))
+            .check(matches(isDisplayed()))
         // check apakah text yang tampil sesuai dengan data yang ada
-        Espresso.onView(ViewMatchers.withId(R.id.text_title))
-            .check(ViewAssertions.matches(ViewMatchers.withText(dummyCourse[0].title)))
-        Espresso.onView(ViewMatchers.withId(R.id.text_date))
-            .check(ViewAssertions.matches(ViewMatchers.withText("Deadline ${dummyCourse[0].deadline}")))
+        onView(withId(R.id.text_title))
+            .check(matches(withText(dummyCourse[0].title)))
+        onView(withId(R.id.text_date))
+            .check(matches(withText("Deadline ${dummyCourse[0].deadline}")))
     }
 
     @Test
     fun loadModule() {
-        Espresso.onView(ViewMatchers.withId(R.id.rv_academy)).perform(
+        onView(withId(R.id.rv_academy)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0,
-                ViewActions.click()
+                click()
             ))
-        Espresso.onView(ViewMatchers.withId(R.id.btn_start)).perform(ViewActions.click())
-        Espresso.onView(ViewMatchers.withId(R.id.rv_module))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(withId(R.id.btn_start)).perform(click())
+        onView(withId(R.id.rv_module))
+            .check(matches(isDisplayed()))
     }
 
     @Test
     fun loadDetailModule() {
-        Espresso.onView(ViewMatchers.withId(R.id.rv_academy)).perform(
+        onView(withId(R.id.rv_academy)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0,
-                ViewActions.click()
+                click()
             ))
-        Espresso.onView(ViewMatchers.withId(R.id.btn_start)).perform(ViewActions.click())
-        Espresso.onView(ViewMatchers.withId(R.id.rv_module)).perform(
+        onView(withId(R.id.btn_start)).perform(click())
+        onView(withId(R.id.rv_module)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0,
-                ViewActions.click()
+                click()
             ))
-        Espresso.onView(ViewMatchers.withId(R.id.web_view))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        onView(withId(R.id.web_view))
+            .check(matches(isDisplayed()))
     }
 
     @Test
     fun loadBookmarks() {
-        Espresso.onView(ViewMatchers.withText(R.string.bookmark)).perform(ViewActions.click())
-        Espresso.onView(ViewMatchers.withId(R.id.rv_bookmark))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        Espresso.onView(ViewMatchers.withId(R.id.rv_bookmark))
-            .perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyCourse.size))
+        onView(withId(R.id.rv_academy)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+        onView(withId(R.id.action_bookmark)).perform(click())
+        onView(isRoot()).perform(ViewActions.pressBack())
+        onView(withText("Bookmark")).perform(click())
+        onView(withId(R.id.rv_bookmark)).check(matches(isDisplayed()))
+        onView(withId(R.id.rv_bookmark)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+        onView(withId(R.id.text_title)).check(matches(isDisplayed()))
+        onView(withId(R.id.text_date)).check(matches(isDisplayed()))
+        onView(withId(R.id.action_bookmark)).perform(click())
+        onView(isRoot()).perform(ViewActions.pressBack())
     }
 
     private fun delay2seconds() {
