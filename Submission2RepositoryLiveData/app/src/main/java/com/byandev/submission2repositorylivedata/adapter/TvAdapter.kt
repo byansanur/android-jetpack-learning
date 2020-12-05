@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.byandev.submission2repositorylivedata.R
 import com.byandev.submission2repositorylivedata.data.repository.remote.TvListResult
-import com.byandev.submission2repositorylivedata.ui.DetailActivity
+import com.byandev.submission2repositorylivedata.ui.activity.DetailActivity
 import com.byandev.submission2repositorylivedata.utils.Constant.Companion.IMAGE_URL
 import com.byandev.submission2repositorylivedata.utils.ConvertDate
 import kotlinx.android.synthetic.main.item_movie.view.*

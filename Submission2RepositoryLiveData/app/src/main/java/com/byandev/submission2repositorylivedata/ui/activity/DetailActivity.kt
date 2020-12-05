@@ -1,8 +1,11 @@
-package com.byandev.submission2repositorylivedata.ui
+package com.byandev.submission2repositorylivedata.ui.activity
 
+import android.annotation.SuppressLint
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.core.app.ShareCompat
@@ -64,6 +67,7 @@ class DetailActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("ResourceType")
     private fun loadTvShowData(tvShow: TvDetailResponse) {
         extended_fab.visibility = View.GONE
         toolbar.title = tvShow.name
@@ -94,6 +98,7 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("ResourceType")
     private fun loadMovieData(movie: MovieDetail) {
         toolbar.title = movie.title
         Glide.with(this)
@@ -144,6 +149,18 @@ class DetailActivity : AppCompatActivity() {
             .setChooserTitle("Bagikan film ini kesiapapun")
             .setText("Hei ini ada film bagus ${title}, lihat disini $homepage")
             .startChooser()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_favorite, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_favorite) {
+            Toast.makeText(applicationContext, "Fitur on progress", Toast.LENGTH_SHORT).show()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun setScrollAppbar() {

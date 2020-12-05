@@ -11,9 +11,11 @@
         android:layout_width="match_parent">
 
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_height="?attr/actionBarSize"
             android:layout_width="match_parent"
-            app:title="@string/app_name"
+            app:title="App name"
+            app:titleTextColor="@color/white"
             app:layout_scrollFlags="scroll|enterAlways"/>
 
         <com.google.android.material.tabs.TabLayout
