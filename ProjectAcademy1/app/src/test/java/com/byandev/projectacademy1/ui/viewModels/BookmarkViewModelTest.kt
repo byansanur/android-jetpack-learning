@@ -63,11 +63,11 @@ class BookmarkViewModelTest {
         val dummyCourses = DataDummy.generateDummyCourse()
         val courses = MutableLiveData<List<CourseEntity>>()
         courses.value = dummyCourses
-        `when`(academyRepository.getBookmarkedCourse()).thenReturn(courses)
+        `when`(academyRepository.getBookmarkedCourses()).thenReturn(courses)
         val courseEntities = viewModel.getBookmark().value
-        verify<AcademyRepository>(academyRepository).getBookmarkedCourse()
+        verify<AcademyRepository>(academyRepository).getBookmarkedCourses()
         assertNotNull(courseEntities)
-        assertEquals(15, courseEntities?.size)
+        assertEquals(5, courseEntities?.size)
 
         viewModel.getBookmark().observeForever(observer)
         verify(observer).onChanged(dummyCourses)

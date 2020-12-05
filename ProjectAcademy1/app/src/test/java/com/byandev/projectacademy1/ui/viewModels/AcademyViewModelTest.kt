@@ -7,6 +7,7 @@ import com.byandev.projectacademy1.data.source.AcademyRepository
 import com.byandev.projectacademy1.data.source.local.entity.CourseEntity
 import com.byandev.projectacademy1.ui.academy.AcademyViewModel
 import com.byandev.projectacademy1.utils.DataDummy
+import com.byandev.projectacademy1.value_object.Resource
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
@@ -50,7 +51,7 @@ class AcademyViewModelTest {
     private lateinit var academyRepository: AcademyRepository
 
     @Mock
-    private lateinit var observer: Observer<List<CourseEntity>>
+    private lateinit var observer: Observer<Resource<List<CourseEntity>>>
 
     @Before
     fun setUp() {
@@ -59,17 +60,18 @@ class AcademyViewModelTest {
 
     @Test
     fun getCourse() {
-        val dummyCourse = DataDummy.generateDummyCourse()
-        val courses = MutableLiveData<List<CourseEntity>>()
-        courses.value = dummyCourse
+        val dummyCourses = Resource.success(DataDummy.generateDummyCourse())
+        val courses = MutableLiveData<Resource<List<CourseEntity>>>()
+        courses.value = dummyCourses
 
-        `when`(academyRepository.getAllCourse()).thenReturn(courses)
-        val courseEntities = viewModel.getCourse().value
-        verify<AcademyRepository>(academyRepository).getAllCourse()
+        `when`(academyRepository.getAllCourses()).thenReturn(courses)
+        val courseEntities = viewModel.getCourse().value?.data
+        verify(academyRepository).getAllCourses()
         assertNotNull(courseEntities)
-        assertEquals(15, courseEntities?.size) // expected data size
+        assertEquals(5, courseEntities?.size)
+
         viewModel.getCourse().observeForever(observer)
-        verify(observer).onChanged(dummyCourse)
+        verify(observer).onChanged(dummyCourses)
     }
 
 }

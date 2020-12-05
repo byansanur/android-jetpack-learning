@@ -1,4 +1,4 @@
-package com.byandev.projectacademy1.utils.helper
+package com.byandev.projectacademy1.utils
 
 import android.content.Context
 import com.byandev.projectacademy1.data.source.remote.response.ContentResponse
