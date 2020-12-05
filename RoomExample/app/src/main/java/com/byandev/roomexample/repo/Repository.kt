@@ -2,6 +2,7 @@ package com.byandev.roomexample.repo
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import com.byandev.roomexample.databases.DatabaseRoom
 import com.byandev.roomexample.databases.Note
 import com.byandev.roomexample.databases.NoteDao
@@ -17,7 +18,9 @@ class Repository(application: Application) {
         noteDao = db.noteDao()
     }
 
-    fun getAllNotes(): LiveData<List<Note>> = noteDao.getAllNotes()
+    fun getAllNotes(): DataSource.Factory<Int, Note> {
+        return noteDao.getAllNotes()
+    }
     fun insert(note: Note) {
         executorService.execute { noteDao.insert(note) }
     }
