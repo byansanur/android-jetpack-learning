@@ -10,5 +10,7 @@ import com.byandev.roomexample.repo.Repository
 
 class MainViewModel(application: Application) : ViewModel() {
     private val repository: Repository = Repository(application)
-    fun getAllNotes(): LiveData<PagedList<Note>> = LivePagedListBuilder(repository.getAllNotes(), 20).build()
+    fun getAllNotes(sort: String): LiveData<PagedList<Note>> {
+        return LivePagedListBuilder(repository.getAllNotes(sort), 20).build()
+    }
 }
