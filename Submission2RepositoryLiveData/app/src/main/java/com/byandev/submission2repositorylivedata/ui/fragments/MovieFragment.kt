@@ -49,7 +49,7 @@ class MovieFragment : Fragment() {
         setRv()
         skeleton = rvListMovie.applySkeleton(R.layout.item_movie, 6)
         skeleton?.showSkeleton()
-        movieViewModel.movie.observe(viewLifecycleOwner, Observer {
+        movieViewModel.movie.observe(viewLifecycleOwner, {
             skeleton?.showOriginal()
             if (it.isNullOrEmpty()) {
                 imgNoData.visibility = View.VISIBLE
